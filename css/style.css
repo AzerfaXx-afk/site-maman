@@ -50,10 +50,8 @@ img { max-width: 100%; height: auto; display: block; }
 .section { padding: 100px 0; }
 
 .section-subtitle {
-    font-family: var(--font-body);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.85rem;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
     color: var(--gold-primary);
     background: var(--gold-gradient);
     -webkit-background-clip: text;
