@@ -4,7 +4,7 @@ const urlsToCache = [
   '/index.html',
   '/css/style.css',
   '/js/main.js',
-  '/logo.svg',
+  '/logo.png',
   '/landing.webp',
   '/profile.webp',
   '/imgscroll1.webp',
