@@ -1,0 +1,11 @@
+{
+  "name": "reflexo-grasse",
+  "version": "1.0.0",
+  "description": "Premium Reflexology Website",
+  "scripts": {
+    "dev": "npx -y serve -p 8085"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
