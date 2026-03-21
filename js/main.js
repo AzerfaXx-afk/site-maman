@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to('.hero-bg', {
         yPercent: 30, // Move background slower than scroll
         ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } // 0.6s smoothing for ultra-fluid touch
     });
     
     gsap.to('.hero-content', {
         yPercent: 40, opacity: 0,
         ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 }
     });
 
     // Hero initial fade up
@@ -53,12 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // 5. Image Parallax Elements (About & Details)
-    // Make sure images have scale > 1 in CSS so they can pan
     gsap.utils.toArray('.about-img, .detail-img-wrapper img').forEach(img => {
         gsap.to(img, {
             yPercent: 15,
             ease: "none",
-            scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true }
+            scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: 0.6 }
         });
     });
 
@@ -195,8 +194,12 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault(); // Disable native scroll while pulling down at top
             const pullY = Math.min(dragDistance * 0.4, DISTANCE_TO_REFRESH + 30);
             gsap.set(ptrContainer, { y: pullY - 80 }); 
-            const rotation = (pullY / DISTANCE_TO_REFRESH) * 360;
-            gsap.set(ptrLogo, { rotation: rotation, scale: 0.8 + (pullY/DISTANCE_TO_REFRESH)*0.3 });
+            
+            // Perfect rotation mapping : exactly 360deg when reaching DISTANCE_TO_REFRESH
+            let progress = pullY / DISTANCE_TO_REFRESH;
+            progress = Math.min(progress, 1); // Cap at 1 for upright logo
+            const rotation = progress * 360;
+            gsap.set(ptrLogo, { rotation: rotation, scale: 0.8 + (progress * 0.4) });
         }
     }, { passive: false });
 
@@ -207,15 +210,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (dragDistance * 0.4 >= DISTANCE_TO_REFRESH && window.scrollY <= 0) {
             isRefreshing = true;
-            // The refresh animation
+            // The refresh animation: Logo spins fast
             gsap.to(ptrContainer, { y: 20, duration: 0.3, ease: "back.out(1.5)" });
-            gsap.to(ptrLogo, { rotation: "+=720", duration: 1, repeat: -1, ease: "power1.inOut" });
+            gsap.to(ptrLogo, { rotation: "+=1080", duration: 1.2, ease: "power2.inOut" });
             
-            // Site reaction
-            gsap.to('body', { scale: 0.98, opacity: 0.8, duration: 0.4, yoyo: true, repeat: 1 });
+            // Site Aspiration (Suck-in effect)
+            gsap.to('body', { 
+                scale: 0.7, 
+                opacity: 0, 
+                rotation: 3, 
+                y: -100,
+                filter: "blur(8px)",
+                duration: 0.7, 
+                ease: "power3.in" 
+            });
 
-            // Trigger actual reload after animation plays a bit
-            setTimeout(() => { window.location.reload(); }, 1200);
+            // Trigger actual reload after aspiration
+            setTimeout(() => { window.location.reload(); }, 750);
         } else if (dragDistance > 0 && window.scrollY <= 0) {
             // Cancel pull
             gsap.to(ptrContainer, { y: -80, duration: 0.3, ease: "power2.out" });
