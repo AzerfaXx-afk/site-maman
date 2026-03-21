@@ -519,15 +519,31 @@
                 }
             };
 
-            grid.addEventListener('click', (e) => {
-                const item = e.target.closest('.diploma-item');
-                if(!item) return;
-                e.preventDefault();
-                const index = Array.from(items).indexOf(item);
-                if (index > -1) {
-                    currentIndex = index;
-                    updateLightboxImage(currentIndex);
-                    lightbox.classList.add('active');
+            // Bulletproof Click Detection bypassing SortableJS 
+            let clickStartX = 0;
+            let clickStartY = 0;
+            
+            grid.addEventListener('pointerdown', (e) => {
+                clickStartX = e.clientX;
+                clickStartY = e.clientY;
+            });
+
+            grid.addEventListener('pointerup', (e) => {
+                const diffX = Math.abs(e.clientX - clickStartX);
+                const diffY = Math.abs(e.clientY - clickStartY);
+                // If it moved less than 5px, treat as a pure click
+                if (diffX < 5 && diffY < 5) {
+                    const item = e.target.closest('.diploma-item');
+                    if(!item) return;
+                    e.preventDefault();
+                    
+                    items = getItems(); // Ensure we use latest DOM order
+                    const index = Array.from(items).indexOf(item);
+                    if (index > -1) {
+                        currentIndex = index;
+                        updateLightboxImage(currentIndex);
+                        lightbox.classList.add('active');
+                    }
                 }
             });
 
