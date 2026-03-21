@@ -207,16 +207,81 @@
             visibility: hidden;
             transition: var(--transition-smooth);
         }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+        .lightbox-zoom-container {
+            position: relative;
+            width: 92vw;
+            height: 90vh;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #fff;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-zoom-container.zoomed {
+            cursor: grab;
+            overflow: auto;
+        }
+        .lightbox-zoom-container.zoomed:active {
+            cursor: grabbing;
+        }
         .lightbox-content {
-            max-width: 95vw;
-            max-height: 95vh;
+            max-width: 100%;
+            max-height: 100%;
             width: auto;
             height: auto;
             object-fit: contain;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            border-radius: 8px;
-            background: #fff;
-            padding: 10px;
+            display: block;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center center;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: high-quality;
+        }
+        .lightbox-zoom-container.zoomed .lightbox-content {
+            width: auto;
+            height: auto;
+            max-width: none;
+            max-height: none;
+            cursor: grab;
+        }
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            z-index: 10001;
+            background: rgba(0,0,0,0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        .lightbox-zoom-hint {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s;
         }
         .sortable-ghost {
             opacity: 0.2;
@@ -249,12 +314,20 @@
             color: #fff;
             font-size: 3rem;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: all 0.3s;
             z-index: 10001;
             padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .lightbox-nav:hover {
             color: var(--primary-color);
+            background: rgba(0,0,0,0.4);
         }
         .lightbox-prev { left: 2%; }
         .lightbox-next { right: 2%; }
@@ -279,10 +352,18 @@
                 height: 50vh;
             }
             .diplomas-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-            .lightbox-nav { font-size: 2rem; padding: 10px; }
+            .lightbox-zoom-container {
+                width: 96vw;
+                height: 88vh;
+                padding: 6px;
+                border-radius: 6px;
+            }
+            .lightbox-nav { font-size: 1.5rem; padding: 10px; width: 44px; height: 44px; }
             .lightbox-prev { left: 5px; }
             .lightbox-next { right: 5px; }
-            .lightbox-content { max-width: 85%; }
+            .lightbox-close { top: 10px; right: 15px; font-size: 2rem; }
+            .lightbox-counter { bottom: 10px; font-size: 0.8rem; }
+            .lightbox-zoom-hint { bottom: 40px; font-size: 0.7rem; }
             .zoom-btn { 
                 opacity: 1; 
                 transform: none; 
@@ -296,8 +377,16 @@
         }
         @media (max-width: 480px) {
             .diplomas-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .lightbox-content { max-width: 90%; }
-            .lightbox-close { top: 15px; right: 20px; font-size: 2rem; }
+            .lightbox-zoom-container {
+                width: 100vw;
+                height: 85vh;
+                padding: 4px;
+                border-radius: 0;
+            }
+            .lightbox-close { top: 8px; right: 12px; font-size: 1.8rem; }
+            .lightbox-nav { font-size: 1.2rem; width: 36px; height: 36px; padding: 8px; }
+            .lightbox-prev { left: 2px; }
+            .lightbox-next { right: 2px; }
         }
     </style>
     
@@ -305,6 +394,16 @@
     <link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
+    <!-- Pull to Refresh Background Container -->
+    <div class="ptr-container" style="position:fixed; top:0; left:0; width:100%; height:120px; background:var(--color-bg); display:flex; align-items:flex-end; justify-content:center; z-index:0; overflow:hidden;">
+        <div class="ptr-logo-wrapper" style="transform:translateY(50px); opacity:0; margin-bottom:20px;">
+            <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo" style="width:40px; height:auto; transition:transform 0s linear;">
+        </div>
+    </div>
+
+    <!-- Main App Wrapper (Dragged during pull-to-refresh) -->
+    <div id="app-wrapper" style="position:relative; z-index:1; background:var(--color-bg); min-height:100vh; transform-origin:top center; transition:transform 0s linear;">
+
     <!-- Navigation (Same as index) -->
     <nav class="navbar">
         <a href="index.html" class="nav-brand-logo">
@@ -327,7 +426,7 @@
         </div>
     </nav>
 
-    <div id="app-wrapper">
+    <div id="page-content">
 
         <!-- Page Hero (img1) -->
         <header class="page-hero">
@@ -447,14 +546,20 @@
             </div>
         </footer>
 
+    </div> <!-- End Page Content -->
+
     </div> <!-- End App Wrapper -->
 
-    <!-- Lightbox Element -->
+    <!-- Lightbox Element (OUTSIDE app-wrapper to escape stacking context) -->
     <div class="lightbox" id="diplomaLightbox">
         <i class="fa-solid fa-xmark lightbox-close" id="closeLightbox"></i>
         <i class="fa-solid fa-chevron-left lightbox-nav lightbox-prev" id="prevLightbox"></i>
         <i class="fa-solid fa-chevron-right lightbox-nav lightbox-next" id="nextLightbox"></i>
-        <img src="" alt="Diplôme" class="lightbox-content" id="lightboxImg">
+        <div class="lightbox-zoom-container" id="zoomContainer">
+            <img src="" alt="Diplôme" class="lightbox-content" id="lightboxImg">
+        </div>
+        <span class="lightbox-zoom-hint" id="zoomHint"><i class="fa-solid fa-magnifying-glass-plus"></i> Double-cliquez pour zoomer</span>
+        <span class="lightbox-counter" id="lightboxCounter">1 / 19</span>
     </div>
 
     <!-- Scripts -->
@@ -470,13 +575,129 @@
             // Lightbox & Sortable Logic
             const lightbox = document.getElementById('diplomaLightbox');
             const lightboxImg = document.getElementById('lightboxImg');
-            const closeLightbox = document.getElementById('closeLightbox');
+            const closeLightboxBtn = document.getElementById('closeLightbox');
+            const zoomContainer = document.getElementById('zoomContainer');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const zoomHint = document.getElementById('zoomHint');
             
             // Re-select items after sorting for correct Lightbox functionality
             const getItems = () => document.querySelectorAll('.diploma-item');
             let items = getItems();
-            const totalItems = items.length;
             let currentIndex = 0;
+            let isZoomed = false;
+
+            // --- ZOOM LOGIC ---
+            const resetZoom = () => {
+                isZoomed = false;
+                zoomContainer.classList.remove('zoomed');
+                lightboxImg.style.transform = 'scale(1)';
+                lightboxImg.style.transformOrigin = 'center center';
+                zoomContainer.scrollTop = 0;
+                zoomContainer.scrollLeft = 0;
+                if(zoomHint) zoomHint.style.opacity = '1';
+            };
+
+            const toggleZoom = (e) => {
+                if(isZoomed) {
+                    resetZoom();
+                } else {
+                    isZoomed = true;
+                    zoomContainer.classList.add('zoomed');
+                    // Calculate zoom origin from click position
+                    const rect = zoomContainer.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    lightboxImg.style.transformOrigin = x + '% ' + y + '%';
+                    lightboxImg.style.transform = 'scale(2.5)';
+                    if(zoomHint) zoomHint.style.opacity = '0';
+                }
+            };
+
+            // Double-click / double-tap to zoom
+            let lastTapTime = 0;
+            zoomContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const now = Date.now();
+                if(now - lastTapTime < 350) {
+                    // Double tap detected
+                    toggleZoom(e);
+                    lastTapTime = 0;
+                } else {
+                    lastTapTime = now;
+                }
+            });
+
+            // Pinch-to-zoom for touch devices
+            let initialPinchDistance = 0;
+            let currentScale = 1;
+            
+            zoomContainer.addEventListener('touchstart', (e) => {
+                if(e.touches.length === 2) {
+                    e.preventDefault();
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    initialPinchDistance = Math.sqrt(dx*dx + dy*dy);
+                    currentScale = isZoomed ? 2.5 : 1;
+                }
+            }, {passive: false});
+
+            zoomContainer.addEventListener('touchmove', (e) => {
+                if(e.touches.length === 2) {
+                    e.preventDefault();
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    const scaleChange = dist / initialPinchDistance;
+                    let newScale = Math.min(Math.max(currentScale * scaleChange, 1), 4);
+                    lightboxImg.style.transform = 'scale(' + newScale + ')';
+                    if(newScale > 1.2) {
+                        zoomContainer.classList.add('zoomed');
+                        isZoomed = true;
+                        if(zoomHint) zoomHint.style.opacity = '0';
+                    }
+                }
+            }, {passive: false});
+
+            zoomContainer.addEventListener('touchend', (e) => {
+                if(e.touches.length < 2) {
+                    // Get final scale from the transform
+                    const match = lightboxImg.style.transform.match(/scale\(([\d.]+)\)/);
+                    if(match) {
+                        const finalScale = parseFloat(match[1]);
+                        if(finalScale <= 1.2) {
+                            resetZoom();
+                        } else {
+                            currentScale = finalScale;
+                        }
+                    }
+                }
+            });
+
+            // Pan when zoomed (mouse drag)
+            let isPanning = false;
+            let panStartX = 0, panStartY = 0;
+            let panScrollLeft = 0, panScrollTop = 0;
+
+            zoomContainer.addEventListener('mousedown', (e) => {
+                if(!isZoomed) return;
+                isPanning = true;
+                panStartX = e.clientX;
+                panStartY = e.clientY;
+                panScrollLeft = zoomContainer.scrollLeft;
+                panScrollTop = zoomContainer.scrollTop;
+            });
+            document.addEventListener('mousemove', (e) => {
+                if(!isPanning) return;
+                zoomContainer.scrollLeft = panScrollLeft - (e.clientX - panStartX);
+                zoomContainer.scrollTop = panScrollTop - (e.clientY - panStartY);
+            });
+            document.addEventListener('mouseup', () => { isPanning = false; });
+
+            // --- UPDATE COUNTER ---
+            const updateCounter = () => {
+                const total = document.querySelectorAll('.diploma-item').length;
+                lightboxCounter.textContent = (currentIndex + 1) + ' / ' + total;
+            };
 
             // EXPLICIT ENTRANCE ANIMATION
             gsap.fromTo(items, 
@@ -489,71 +710,98 @@
             // SORTABLE JS FOR APP-LIKE GRID REORDERING
             const grid = document.querySelector('.diplomas-grid');
             if(grid) {
-                // Initialize Sortable
                 const sortable = new Sortable(grid, {
                     animation: 250,
                     ghostClass: 'sortable-ghost',
                     dragClass: 'sortable-drag',
                     easing: "cubic-bezier(1, 0, 0, 1)",
-                    delay: 150, // Mobile safe dragging (wait slightly before drag starts to allow scroll)
+                    delay: 150,
                     delayOnTouchOnly: true,
-                    fallbackTolerance: 5, // Prevents shaky clicks from starting a drag and blocking the lightbox
+                    filter: ".zoom-btn",
+                    preventOnFilter: false,
+                    fallbackTolerance: 5,
                     onEnd: function (evt) {
-                        items = getItems(); // Update items array to match new DOM order
-                        // Reset to original order after 5s of inactivity
+                        items = getItems();
                         if (window.resetGridTimeout) clearTimeout(window.resetGridTimeout);
                         window.resetGridTimeout = setTimeout(() => {
-                            sortable.sort(initialOrder, true); // True = animate transition
-                            items = getItems(); // Refresh items again after reset
+                            sortable.sort(initialOrder, true);
+                            items = getItems();
                         }, 5000);
                     }
                 });
                 const initialOrder = sortable.toArray();
             }
 
-            // ABSOLUTE UNBLOCKABLE CAPTURE-PHASE CLICK HANDLER
-            // SortableJS brutally swallows native click events on mobile devices.
-            // By hooking into the window's capture phase (`true`), we intercept the tap BEFORE Sortable can block it!
-            let startX = 0, startY = 0;
-            window.addEventListener('pointerdown', (e) => {
-                startX = e.clientX;
-                startY = e.clientY;
-            }, true);
+            // --- OPEN LIGHTBOX ---
+            const openLightbox = (index) => {
+                currentIndex = index;
+                const currentItems = document.querySelectorAll('.diploma-item');
+                const src = currentItems[index].getAttribute('data-src');
+                if(src) {
+                    resetZoom();
+                    lightboxImg.src = src;
+                    gsap.fromTo(lightboxImg, {opacity: 0.3, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out'});
+                    lightbox.classList.add('active');
+                    updateCounter();
+                    document.body.style.overflow = 'hidden';
+                }
+            };
 
-            window.addEventListener('pointerup', (e) => {
-                const diffX = Math.abs(e.clientX - startX);
-                const diffY = Math.abs(e.clientY - startY);
-                // If the pointer moved less than 15px (standard fat finger threshold), it's a solid TAP!
-                if(diffX < 15 && diffY < 15) {
+            // FOOLPROOF PURE-TIME TAP EVENT
+            // If touch -> release is under 300ms, it is a click. If longer, it is a drag.
+            let tapStartTime = 0;
+            let tapStartPos = {x: 0, y: 0};
+            const gridContainer = document.querySelector('.diplomas-grid');
+
+            if(gridContainer) {
+                gridContainer.addEventListener('mousedown', (e) => { tapStartTime = Date.now(); tapStartPos = {x: e.clientX, y: e.clientY}; });
+                gridContainer.addEventListener('touchstart', (e) => { tapStartTime = Date.now(); tapStartPos = {x: e.touches[0].clientX, y: e.touches[0].clientY}; }, {passive: true});
+
+                const handleLightboxTap = (e) => {
+                    const elapsed = Date.now() - tapStartTime;
+                    if (elapsed > 300) return; // Held too long = drag
+
+                    // Check movement distance (to avoid accidental taps after micro-drags)
+                    let endX, endY;
+                    if(e.changedTouches && e.changedTouches.length > 0) {
+                        endX = e.changedTouches[0].clientX;
+                        endY = e.changedTouches[0].clientY;
+                    } else {
+                        endX = e.clientX;
+                        endY = e.clientY;
+                    }
+                    const dx = Math.abs(endX - tapStartPos.x);
+                    const dy = Math.abs(endY - tapStartPos.y);
+                    if(dx > 10 || dy > 10) return; // Finger moved too much
+
                     const el = e.target.closest('.diploma-item');
                     if(el && !document.querySelector('.sortable-drag')) {
-                        // Success! We tapped a diploma.
                         e.preventDefault();
-                        const currentItems = document.querySelectorAll('.diploma-item');
-                        const index = Array.from(currentItems).indexOf(el);
+                        const allItems = document.querySelectorAll('.diploma-item');
+                        const index = Array.from(allItems).indexOf(el);
                         if(index > -1) {
-                            window.lightboxCurrentIndex = index;
-                            const src = el.getAttribute('data-src');
-                            if(src) {
-                                gsap.fromTo(lightboxImg, {opacity: 0.3, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out'});
-                                lightboxImg.src = src;
-                                lightbox.classList.add('active');
-                            }
+                            openLightbox(index);
                         }
                     }
-                }
-            }, true); // `true` guarantees this runs instantly BEFORE everything else!
+                };
 
+                gridContainer.addEventListener('mouseup', handleLightboxTap);
+                gridContainer.addEventListener('touchend', handleLightboxTap);
+            }
+
+            // --- UPDATE IMAGE ---
             const updateLightboxImage = (index) => {
                 const currentItems = document.querySelectorAll('.diploma-item');
                 const src = currentItems[index].getAttribute('data-src');
                 if(src) {
-                    gsap.fromTo(lightboxImg, {opacity: 0.3, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out'});
+                    resetZoom();
+                    gsap.fromTo(lightboxImg, {opacity: 0, x: 0}, {opacity: 1, x: 0, duration: 0.35, ease: 'power2.out'});
                     lightboxImg.src = src;
+                    updateCounter();
                 }
             };
 
-            // Navigation listeners reliant on dynamic current DOM arrays
+            // Navigation (prev / next)
             document.getElementById('prevLightbox').addEventListener('click', (e) => {
                 e.stopPropagation();
                 const currentItems = document.querySelectorAll('.diploma-item');
@@ -568,9 +816,37 @@
                 updateLightboxImage(currentIndex);
             });
 
-            closeLightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+            // Swipe navigation on lightbox (mobile)
+            let swipeStartX = 0;
+            let swipeStartY = 0;
+            lightbox.addEventListener('touchstart', (e) => {
+                if(isZoomed) return;
+                swipeStartX = e.touches[0].clientX;
+                swipeStartY = e.touches[0].clientY;
+            }, {passive: true});
+            lightbox.addEventListener('touchend', (e) => {
+                if(isZoomed) return;
+                const dx = e.changedTouches[0].clientX - swipeStartX;
+                const dy = Math.abs(e.changedTouches[0].clientY - swipeStartY);
+                if(Math.abs(dx) > 60 && dy < 100) {
+                    if(dx > 0) {
+                        document.getElementById('prevLightbox').click();
+                    } else {
+                        document.getElementById('nextLightbox').click();
+                    }
+                }
+            });
+
+            // Close lightbox
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                resetZoom();
+                document.body.style.overflow = '';
+            };
+
+            closeLightboxBtn.addEventListener('click', closeLightbox);
             lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
+                if (e.target === lightbox) closeLightbox();
             });
 
             // Keyboard navigation
@@ -578,7 +854,7 @@
                 if (lightbox.classList.contains('active')) {
                     if (e.key === 'ArrowLeft') document.getElementById('prevLightbox').click();
                     if (e.key === 'ArrowRight') document.getElementById('nextLightbox').click();
-                    if (e.key === 'Escape') closeLightbox.click();
+                    if (e.key === 'Escape') closeLightbox();
                 }
             });
         });
