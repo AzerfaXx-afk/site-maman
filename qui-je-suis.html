@@ -44,17 +44,19 @@
             padding: 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Do NOT animate transform in CSS to avoid Draggable conflicts */
             border: 3px solid #F4F1EA;
             aspect-ratio: 3/4;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            z-index: 1;
         }
         .diploma-item:hover {
-            transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(193, 154, 107, 0.2);
             border-color: var(--primary-color);
+            /* CSS Transform removed, GSAP handles scale on press/drag now */
         }
         .diploma-item img {
             max-width: 100%;
@@ -420,6 +422,14 @@
             const items = document.querySelectorAll('.diploma-item');
             const totalItems = items.length;
             let currentIndex = 0;
+
+            // EXPLICIT ENTRANCE ANIMATION: Guarantees visibility and opacity=1
+            gsap.fromTo(items, 
+                { opacity: 0, scale: 0.5, y: 50 }, 
+                { opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.05, ease: 'back.out(1.5)', 
+                  scrollTrigger: { trigger: '.diplomas-grid', start: 'top 85%' } 
+                }
+            );
             
             const updateLightboxImage = (index) => {
                 const src = items[index].getAttribute('data-src');
@@ -451,12 +461,14 @@
                             y: 0, 
                             duration: 1.2, 
                             ease: "elastic.out(1, 0.5)",
-                            onComplete: () => gsap.set(target, { clearProps: "zIndex" })
+                            onComplete: () => {
+                                gsap.set(target, { clearProps: "zIndex" });
+                            }
                         });
                     }, 5000);
                 },
                 onClick: function(e) {
-                    // This is triggered only on click, not drag.
+                    // This is triggered only on single click, not on drag end!
                     e.preventDefault();
                     const index = Array.from(items).indexOf(this.target);
                     if (index > -1) {
