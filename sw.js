@@ -1,4 +1,4 @@
-const CACHE_NAME = 'reflexo-cache-v1';
+const CACHE_NAME = 'reflexo-cache-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -14,6 +14,7 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting(); // Force active takeover
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -42,6 +43,7 @@ self.addEventListener('fetch', event => {
 
 // Update service worker logic
 self.addEventListener('activate', event => {
+  event.waitUntil(clients.claim()); // Take control of all pages instantly
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
