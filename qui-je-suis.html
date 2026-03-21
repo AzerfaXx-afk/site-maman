@@ -451,6 +451,7 @@
                     easing: "cubic-bezier(1, 0, 0, 1)",
                     delay: 150, // Mobile safe dragging (wait slightly before drag starts to allow scroll)
                     delayOnTouchOnly: true,
+                    fallbackTolerance: 5, // Prevents shaky clicks from starting a drag and blocking the lightbox
                     onEnd: function (evt) {
                         items = getItems(); // Update items array to match new DOM order
                         // Reset to original order after 5s of inactivity
