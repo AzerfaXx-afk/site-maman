@@ -174,17 +174,6 @@
             opacity: 1;
             visibility: visible;
         }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90vh;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            border-radius: 8px;
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .lightbox.active .lightbox-content {
-            transform: scale(1);
-        }
         .lightbox-close {
             position: absolute;
             top: 30px;
@@ -214,6 +203,27 @@
         }
         .lightbox-prev { left: 2%; }
         .lightbox-next { right: 2%; }
+        .lightbox-content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            cursor: grab;
+            transition: transform 0.1s linear; /* Optional smoothing for panzoom */
+        }
+        .lightbox-content:active {
+            cursor: grabbing;
+        }
         @media (max-width: 1200px) {
             .diplomas-grid { grid-template-columns: repeat(4, 1fr); }
         }
@@ -238,11 +248,11 @@
             .lightbox-nav { font-size: 2rem; padding: 10px; }
             .lightbox-prev { left: 5px; }
             .lightbox-next { right: 5px; }
-            .lightbox-content { max-width: 85%; }
+            .lightbox-content { max-width: 95%; max-height: 85vh; }
         }
         @media (max-width: 480px) {
             .diplomas-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .lightbox-content { max-width: 90%; }
+            .lightbox-content { max-width: 100%; max-height: 90vh; }
             .lightbox-close { top: 15px; right: 20px; font-size: 2rem; }
         }
     </style>
@@ -399,12 +409,15 @@
         <i class="fa-solid fa-xmark lightbox-close" id="closeLightbox"></i>
         <i class="fa-solid fa-chevron-left lightbox-nav lightbox-prev" id="prevLightbox"></i>
         <i class="fa-solid fa-chevron-right lightbox-nav lightbox-next" id="nextLightbox"></i>
-        <img src="" alt="Diplôme" class="lightbox-content" id="lightboxImg">
+        <div class="lightbox-content-wrapper" id="lightboxImgWrapper">
+            <img src="" alt="Diplôme" class="lightbox-content" id="lightboxImg">
+        </div>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js"></script>
     <script src="js/main.js"></script> <!-- Reusing main.js for global reveals/hamburger -->
     
     <!-- About Page Scripts -->
@@ -413,17 +426,34 @@
 
             // Lightbox Logic
             const lightbox = document.getElementById('diplomaLightbox');
+            const lightboxImgWrapper = document.getElementById('lightboxImgWrapper');
             const lightboxImg = document.getElementById('lightboxImg');
             const closeLightbox = document.getElementById('closeLightbox');
             const items = document.querySelectorAll('.diploma-item');
             const totalItems = items.length;
             let currentIndex = 0;
             
+            // Initialize Panzoom for zooming & panning
+            let pzInstance = null;
+            if (typeof panzoom !== 'undefined') {
+                pzInstance = panzoom(lightboxImg, {
+                    maxZoom: 5,
+                    minZoom: 1,
+                    bounds: true,
+                    boundsPadding: 0.1
+                });
+            }
+            
             const updateLightboxImage = (index) => {
                 const src = items[index].getAttribute('data-src');
                 if(src) {
-                    // Small pop animation when switching
-                    gsap.fromTo(lightboxImg, {opacity: 0.5, scale: 0.95}, {opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out'});
+                    // Reset zoom back to original
+                    if (pzInstance) {
+                        pzInstance.zoomAbs(0, 0, 1);
+                        pzInstance.moveTo(0, 0);
+                    }
+                    // Small pop animation on wrapper when switching
+                    gsap.fromTo(lightboxImgWrapper, {opacity: 0.5, scale: 0.95}, {opacity: 1, scale: 1, duration: 0.3, ease: 'power2.out'});
                     lightboxImg.src = src;
                 }
             };
