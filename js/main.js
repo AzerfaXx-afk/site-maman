@@ -138,4 +138,88 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('no-scroll');
         });
     }
+
+    // 11. Custom PWA Install Prompt
+    let deferredPrompt;
+    const installPrompt = document.getElementById('installPrompt');
+    const btnInstall = document.getElementById('btnInstall');
+    const closeInstall = document.getElementById('closeInstall');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault(); // Prevent native mini-infobar
+        deferredPrompt = e;
+        if(!localStorage.getItem('pwaPromptDismissed')) {
+            setTimeout(() => {
+                if(installPrompt) installPrompt.classList.add('visible');
+            }, 3000);
+        }
+    });
+
+    if(btnInstall && closeInstall) {
+        btnInstall.addEventListener('click', async () => {
+            installPrompt.classList.remove('visible');
+            if(deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+            }
+        });
+        closeInstall.addEventListener('click', () => {
+            installPrompt.classList.remove('visible');
+            localStorage.setItem('pwaPromptDismissed', 'true');
+        });
+    }
+
+    // 12. Snapchat-style Pull to Refresh logic
+    const ptrContainer = document.querySelector('.ptr-container');
+    const ptrLogo = document.querySelector('.ptr-logo');
+    let startY = 0;
+    let currentY = 0;
+    let isPulling = false;
+    let isRefreshing = false;
+    const DISTANCE_TO_REFRESH = 100;
+
+    document.addEventListener('touchstart', (e) => {
+        if (window.scrollY === 0) {
+            startY = e.touches[0].clientY;
+            isPulling = true;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isPulling || isRefreshing) return;
+        currentY = e.touches[0].clientY;
+        const dragDistance = currentY - startY;
+
+        if (dragDistance > 0 && window.scrollY <= 0) {
+            e.preventDefault(); // Disable native scroll while pulling down at top
+            const pullY = Math.min(dragDistance * 0.4, DISTANCE_TO_REFRESH + 30);
+            gsap.set(ptrContainer, { y: pullY - 80 }); 
+            const rotation = (pullY / DISTANCE_TO_REFRESH) * 360;
+            gsap.set(ptrLogo, { rotation: rotation, scale: 0.8 + (pullY/DISTANCE_TO_REFRESH)*0.3 });
+        }
+    }, { passive: false });
+
+    document.addEventListener('touchend', (e) => {
+        if (!isPulling || isRefreshing) return;
+        isPulling = false;
+        const dragDistance = currentY - startY;
+
+        if (dragDistance * 0.4 >= DISTANCE_TO_REFRESH && window.scrollY <= 0) {
+            isRefreshing = true;
+            // The refresh animation
+            gsap.to(ptrContainer, { y: 20, duration: 0.3, ease: "back.out(1.5)" });
+            gsap.to(ptrLogo, { rotation: "+=720", duration: 1, repeat: -1, ease: "power1.inOut" });
+            
+            // Site reaction
+            gsap.to('body', { scale: 0.98, opacity: 0.8, duration: 0.4, yoyo: true, repeat: 1 });
+
+            // Trigger actual reload after animation plays a bit
+            setTimeout(() => { window.location.reload(); }, 1200);
+        } else if (dragDistance > 0 && window.scrollY <= 0) {
+            // Cancel pull
+            gsap.to(ptrContainer, { y: -80, duration: 0.3, ease: "power2.out" });
+        }
+    });
+
 });

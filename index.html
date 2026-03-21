@@ -26,6 +26,12 @@
     <link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
+    <!-- Pull to Refresh Indicator -->
+    <div class="ptr-container">
+        <div class="ptr-logo-wrapper">
+            <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
+        </div>
+    </div>
 
     <!-- Vertical Scroll Indicator -->
     <div class="scroll-sidebar">
@@ -263,6 +269,21 @@
             </div>
         </div>
     </footer>
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        <div class="pwa-content">
+            <img src="assets/img/logo.png" alt="S. Bouteloup">
+            <div class="pwa-text">
+                <strong>Installer l'App</strong>
+                <p>Accès rapide, hors-ligne et réactif.</p>
+            </div>
+        </div>
+        <div class="pwa-actions">
+            <button class="btn btn-outline-primary btn-sm" id="closeInstall">Plus tard</button>
+            <button class="btn btn-primary btn-sm" id="btnInstall">Installer</button>
+        </div>
+    </div>
 
     <!-- GSAP, ScrollTrigger & Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
