@@ -26,15 +26,18 @@
     <link rel="icon" type="image/png" href="assets/img/logo.png">
 </head>
 <body>
-    <!-- Pull to Refresh Indicator -->
+    <!-- Pull to Refresh Background Container -->
     <div class="ptr-container">
         <div class="ptr-logo-wrapper">
             <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
         </div>
     </div>
 
-    <!-- Vertical Scroll Indicator -->
-    <div class="scroll-sidebar">
+    <!-- Main App Wrapper (Dragged during pull-to-refresh) -->
+    <div id="app-wrapper">
+
+        <!-- Vertical Scroll Indicator -->
+        <div class="scroll-sidebar">
         <a href="#accueil" class="scroll-dot active" data-target="accueil" title="Accueil"><span>Accueil</span></a>
         <a href="#apropos" class="scroll-dot" data-target="apropos" title="Qui je suis"><span>À Propos</span></a>
         <a href="#suedois" class="scroll-dot" data-target="suedois" title="Massage Suédois"><span>Suédois</span></a>
@@ -269,6 +272,7 @@
             </div>
         </div>
     </footer>
+    </div> <!-- End of #app-wrapper -->
 
     <!-- PWA Install Prompt -->
     <div class="pwa-install-prompt" id="installPrompt">

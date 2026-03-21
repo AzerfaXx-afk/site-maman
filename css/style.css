@@ -31,13 +31,26 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; touch-action: pan-x pan-y; }
 body {
-    background-color: var(--color-bg);
+    background-color: #2b1d14; /* Dark wood fallback */
+    background-image: url('../assets/img/wood-texture-logo.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--color-text);
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
     touch-action: pan-x pan-y;
     -webkit-font-smoothing: antialiased;
+}
+
+#app-wrapper {
+    position: relative;
+    z-index: 10;
+    background-color: var(--color-bg);
+    min-height: 100vh;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.4);
+    will-change: transform;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -830,27 +843,25 @@ body.no-scroll { overflow: hidden; }
 .ptr-container {
     position: fixed;
     top: 0; left: 0; width: 100%;
-    height: 80px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000;
-    pointer-events: none;
-    transform: translateY(-100%);
-    will-change: transform;
+    z-index: 5; /* Behind app-wrapper */
 }
 .ptr-logo-wrapper {
-    width: 45px; height: 45px;
+    width: 60px; height: 60px;
     border-radius: 50%;
-    background: var(--glass-bg);
-    box-shadow: 0 4px 15px rgba(107, 66, 38, 0.2);
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 6px;
+    padding: 0;
+    transform: scale(0.5); /* initial scale */
 }
 .ptr-logo {
     width: 100%; height: 100%; object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
 }
 
 /* ========================================================================= 

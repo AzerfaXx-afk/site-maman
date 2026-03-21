@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to('.hero-bg', {
         yPercent: 30, // Move background slower than scroll
         ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } // 0.6s smoothing for ultra-fluid touch
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } 
     });
     
     gsap.to('.hero-content', {
         yPercent: 40, opacity: 0,
         ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 }
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
     });
 
     // Hero initial fade up
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to(img, {
             yPercent: 15,
             ease: "none",
-            scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: 0.6 }
+            scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true }
         });
     });
 
@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 11. Custom PWA Install Prompt
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     let deferredPrompt;
     const installPrompt = document.getElementById('installPrompt');
     const btnInstall = document.getElementById('btnInstall');
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault(); // Prevent native mini-infobar
         deferredPrompt = e;
-        if(!localStorage.getItem('pwaPromptDismissed')) {
+        if(!localStorage.getItem('pwaPromptDismissed') && !isStandalone) {
             setTimeout(() => {
                 if(installPrompt) installPrompt.classList.add('visible');
             }, 3000);
@@ -170,16 +171,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 12. Snapchat-style Pull to Refresh logic
-    const ptrContainer = document.querySelector('.ptr-container');
+    const appWrapper = document.getElementById('app-wrapper');
+    const ptrLogoWrapper = document.querySelector('.ptr-logo-wrapper');
     const ptrLogo = document.querySelector('.ptr-logo');
     let startY = 0;
     let currentY = 0;
     let isPulling = false;
     let isRefreshing = false;
-    const DISTANCE_TO_REFRESH = 100;
+    const DISTANCE_TO_REFRESH = 120;
 
     document.addEventListener('touchstart', (e) => {
-        if (window.scrollY === 0) {
+        if (window.scrollY <= 10) {
             startY = e.touches[0].clientY;
             isPulling = true;
         }
@@ -192,14 +194,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (dragDistance > 0 && window.scrollY <= 0) {
             e.preventDefault(); // Disable native scroll while pulling down at top
-            const pullY = Math.min(dragDistance * 0.4, DISTANCE_TO_REFRESH + 30);
-            gsap.set(ptrContainer, { y: pullY - 80 }); 
+            const pullY = Math.min(dragDistance * 0.45, DISTANCE_TO_REFRESH + 30);
             
-            // Perfect rotation mapping : exactly 360deg when reaching DISTANCE_TO_REFRESH
+            // Drag the ENTIRE app view down!
+            gsap.set(appWrapper, { y: pullY }); 
+            
+            // Logo appears and scales up from the wood background
             let progress = pullY / DISTANCE_TO_REFRESH;
             progress = Math.min(progress, 1); // Cap at 1 for upright logo
             const rotation = progress * 360;
-            gsap.set(ptrLogo, { rotation: rotation, scale: 0.8 + (progress * 0.4) });
+            gsap.set(ptrLogoWrapper, { scale: 0.4 + (progress * 0.6), opacity: progress });
+            gsap.set(ptrLogo, { rotation: rotation });
         }
     }, { passive: false });
 
@@ -208,28 +213,28 @@ document.addEventListener('DOMContentLoaded', () => {
         isPulling = false;
         const dragDistance = currentY - startY;
 
-        if (dragDistance * 0.4 >= DISTANCE_TO_REFRESH && window.scrollY <= 0) {
+        if (dragDistance * 0.45 >= DISTANCE_TO_REFRESH && window.scrollY <= 0) {
             isRefreshing = true;
-            // The refresh animation: Logo spins fast
-            gsap.to(ptrContainer, { y: 20, duration: 0.3, ease: "back.out(1.5)" });
+            // The refresh animation: Logo spins fast and pops
+            gsap.to(ptrLogoWrapper, { scale: 1.2, duration: 0.4, ease: "back.out(2)" });
             gsap.to(ptrLogo, { rotation: "+=1080", duration: 1.2, ease: "power2.inOut" });
             
             // Site Aspiration (Suck-in effect)
-            gsap.to('body', { 
-                scale: 0.7, 
+            gsap.to(appWrapper, { 
+                y: DISTANCE_TO_REFRESH - 20, 
+                scale: 0.9, 
                 opacity: 0, 
-                rotation: 3, 
-                y: -100,
-                filter: "blur(8px)",
-                duration: 0.7, 
-                ease: "power3.in" 
+                filter: "blur(10px)",
+                duration: 0.6, 
+                ease: "power3.inOut" 
             });
 
             // Trigger actual reload after aspiration
-            setTimeout(() => { window.location.reload(); }, 750);
+            setTimeout(() => { window.location.reload(); }, 800);
         } else if (dragDistance > 0 && window.scrollY <= 0) {
             // Cancel pull
-            gsap.to(ptrContainer, { y: -80, duration: 0.3, ease: "power2.out" });
+            gsap.to(appWrapper, { y: 0, duration: 0.4, ease: "power3.out" });
+            gsap.to(ptrLogoWrapper, { scale: 0.4, opacity: 0, duration: 0.3 });
         }
     });
 
