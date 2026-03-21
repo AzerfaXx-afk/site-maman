@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     document.addEventListener('touchmove', (e) => {
-        if (!isPulling || isRefreshing) return;
+        if (!isPulling || isRefreshing || !ptrLogoWrapper || !appWrapper) return;
         currentY = e.touches[0].clientY;
         const dragDistance = currentY - startY;
 
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: false });
 
     document.addEventListener('touchend', (e) => {
-        if (!isPulling || isRefreshing) return;
+        if (!isPulling || isRefreshing || !ptrLogoWrapper || !appWrapper) return;
         isPulling = false;
         const dragDistance = currentY - startY;
 

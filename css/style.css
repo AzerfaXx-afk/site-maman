@@ -241,6 +241,20 @@ img { max-width: 100%; height: auto; display: block; }
 .navbar:not(.scrolled) .nav-socials a { background: rgba(255,255,255,0.1); }
 .navbar:not(.scrolled) .nav-socials a:hover { background: var(--primary-color); color: #fff; }
 
+/* Adjustment for transparent navbar button */
+.navbar:not(.scrolled) .btn-outline-primary {
+    color: #fff;
+    border-color: #fff;
+}
+.navbar:not(.scrolled) .btn-outline-primary:hover {
+    background-image: url('../assets/img/wood-texture-logo.png');
+    background-size: cover;
+    background-position: center;
+    border-color: transparent;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    color: #fff;
+}
+
 /* ========================================================================= 
    BUTTONS
    ========================================================================= */
@@ -295,19 +309,6 @@ img { max-width: 100%; height: auto; display: block; }
     text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
-/* Adjustment for transparent navbar button */
-.navbar:not(.scrolled) .btn-outline-primary {
-    color: #fff;
-    border-color: #fff;
-}
-.navbar:not(.scrolled) .btn-outline-primary:hover {
-    background-image: url('../assets/img/wood-texture-logo.png');
-    background-size: cover;
-    background-position: center;
-    border-color: transparent;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    color: #fff;
-}
 
 .btn-text {
     background: transparent;
@@ -747,6 +748,7 @@ img { max-width: 100%; height: auto; display: block; }
     background-color: var(--primary-color);
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
 }
+
 
 .navbar:not(.scrolled) .hamburger span {
     background-color: #fff;
