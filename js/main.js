@@ -8,60 +8,33 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('load', () => setTimeout(() => window.scrollTo(0, 0), 10));
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Lenis for Ultra Fluid Scroll
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-    });
 
-    // 2. Tie Lenis to GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
-    gsap.ticker.lagSmoothing(0);
-
-    // 3. Navbar Scroll Effect
+    // 1. Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) navbar.classList.add('scrolled');
         else navbar.classList.remove('scrolled');
     });
 
-    // 4. Hero Storytelling Parallax
-    gsap.to('.hero-bg', {
-        yPercent: 30, // Move background slower than scroll
-        ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } 
-    });
-    
-    gsap.to('.hero-content', {
-        yPercent: 40, opacity: 0,
-        ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+    // 2. Initialize GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial Hero Animation
+    gsap.to('.hero-img', {
+        scale: 1.15,
+        duration: 20,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
     });
 
     // Hero initial fade up
     gsap.fromTo('.fade-up', 
-        { y: 50, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 1.2, stagger: 0.15, ease: "power3.out", delay: 0.2 }
+        { y: 40, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: 1, stagger: 0.15, ease: "power3.out", delay: 0.2 }
     );
 
-    // 5. Image Parallax Elements (About & Details)
-    gsap.utils.toArray('.about-img, .detail-img-wrapper img').forEach(img => {
-        gsap.to(img, {
-            yPercent: 15,
-            ease: "none",
-            scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true }
-        });
-    });
-
-    // 6. Reusable Section Reveals (Text coming in)
+    // 3. Reusable Reveal Animations
     const revealElements = [
         { selector: '.reveal-left', x: -50, y: 0 },
         { selector: '.reveal-right', x: 50, y: 0 },
@@ -72,25 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.utils.toArray(config.selector).forEach(element => {
             gsap.fromTo(element, 
                 { x: config.x, y: config.y, autoAlpha: 0 },
-                { x: 0, y: 0, autoAlpha: 1, duration: 1.2, ease: "power3.out",
-                  scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }
+                { x: 0, y: 0, autoAlpha: 1, duration: 1, ease: "power3.out",
+                  scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none none" }
                 }
             );
         });
     });
 
-    // 7. Grid Staggers (Techniques)
+    // 4. Grid Staggers (Techniques)
     gsap.utils.toArray('.techniques-grid').forEach(grid => {
         const items = grid.querySelectorAll('.reveal-scale');
         gsap.fromTo(items, 
-            { scale: 0.9, y: 50, autoAlpha: 0 },
-            { scale: 1, y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)",
+            { scale: 0.9, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)",
                 scrollTrigger: { trigger: grid, start: "top 80%" }
             }
         );
     });
 
-    // 8. Fluid Anchor Scrolling via Lenis
+    // Individual scale reveals (images in details)
+    gsap.utils.toArray('.detail-img-wrapper.reveal-scale').forEach(wrapper => {
+        gsap.fromTo(wrapper,
+            { scale: 0.95, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: 1.2, ease: "power3.out",
+                scrollTrigger: { trigger: wrapper, start: "top 85%" }
+            }
+        );
+    });
+
+    // 5. Smooth Scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -98,10 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
-                lenis.scrollTo(targetElement, { offset: -80 }); // offset for navbar
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 
                 // Close mobile menu if open
-                if (hamburger.classList.contains('active')) {
+                if (hamburger && hamburger.classList.contains('active')) {
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('active');
                     document.body.classList.remove('no-scroll');
