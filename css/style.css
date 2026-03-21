@@ -10,10 +10,10 @@
     --heading-color: #3A3530; /* Very dark earthy brown/gray for headings */
     
     /* Nature Accents */
-    --primary-color: #8BA888; /* Soft sage green */
-    --primary-dark: #6B8568; 
-    --primary-gradient: linear-gradient(135deg, #A3BEA0 0%, #8BA888 100%);
-    --accent-color: #C2956E; /* Warm wood/terracotta */
+    --primary-color: #C19A6B; /* Pastel Bois / Soft camel-wood tone */
+    --primary-dark: #8B5A3C; /* Darker warm wood tone */
+    --primary-gradient: linear-gradient(135deg, #D4B895 0%, #C19A6B 100%);
+    --accent-color: #6B4226; /* Deep walnut tone from the logo */
     
     /* Typography */
     --font-heading: 'Playfair Display', serif;
@@ -22,7 +22,7 @@
     /* Transitions & Effects */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --glass-bg: rgba(253, 251, 247, 0.9);
-    --glass-border: 1px solid rgba(139, 168, 136, 0.2);
+    --glass-border: 1px solid rgba(193, 154, 107, 0.2);
 }
 
 /* ========================================================================= 
@@ -90,10 +90,10 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .scroll-dot.active {
-    background-image: url('../assets/img/wood-texture.png');
+    background-image: url('../assets/img/wood-texture-logo.png');
     background-size: cover;
     border-color: transparent;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(193, 154, 107, 0.4);
     transform: scale(1.3);
 }
 
@@ -216,7 +216,7 @@ img { max-width: 100%; height: auto; display: block; }
     background: var(--primary-color);
     color: #fff;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(139, 168, 136, 0.3);
+    box-shadow: 0 5px 15px rgba(193, 154, 107, 0.3);
 }
 
 /* Navbar special text color handling for transparent top (assuming hero image is dark) */
@@ -248,19 +248,19 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .btn-primary {
-    background-image: url('../assets/img/wood-texture.png');
+    background-image: url('../assets/img/wood-texture-logo.png');
     background-size: cover;
     background-position: center;
     color: #fff;
     border: none;
-    box-shadow: 0 4px 15px rgba(139, 168, 136, 0.3);
+    box-shadow: 0 4px 15px rgba(107, 66, 38, 0.3);
     text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .btn-primary:hover {
-    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('../assets/img/wood-texture.png');
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../assets/img/wood-texture-logo.png');
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 168, 136, 0.4);
+    box-shadow: 0 6px 20px rgba(107, 66, 38, 0.4);
     color: #fff;
 }
 
@@ -272,13 +272,13 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .btn-outline-primary:hover {
-    background-image: url('../assets/img/wood-texture.png');
+    background-image: url('../assets/img/wood-texture-logo.png');
     background-size: cover;
     background-position: center;
     color: #fff;
     border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 168, 136, 0.3);
+    box-shadow: 0 4px 15px rgba(107, 66, 38, 0.3);
     text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
@@ -288,7 +288,7 @@ img { max-width: 100%; height: auto; display: block; }
     border-color: #fff;
 }
 .navbar:not(.scrolled) .btn-outline-primary:hover {
-    background-image: url('../assets/img/wood-texture.png');
+    background-image: url('../assets/img/wood-texture-logo.png');
     background-size: cover;
     background-position: center;
     border-color: transparent;
@@ -444,10 +444,10 @@ img { max-width: 100%; height: auto; display: block; }
 .nature-accent-box {
     position: absolute; top: 30px; left: -30px; width: 100%; height: 100%;
     border: none; z-index: 1; border-radius: 8px;
-    background-image: url('../assets/img/wood-texture.png');
+    background-image: url('../assets/img/wood-texture-logo.png');
     background-size: cover;
     background-position: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .about-text p { margin-bottom: 20px; font-size: 1.05rem; color: var(--color-text); }
@@ -564,7 +564,7 @@ img { max-width: 100%; height: auto; display: block; }
 .tech-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to top, rgba(139, 168, 136, 0.9) 0%, rgba(139, 168, 136, 0.2) 100%);
+    background: linear-gradient(to top, rgba(107, 66, 38, 0.9) 0%, rgba(107, 66, 38, 0.2) 100%);
     opacity: 0;
     transition: var(--transition-smooth);
     display: flex;
@@ -609,7 +609,7 @@ img { max-width: 100%; height: auto; display: block; }
     justify-content: center;
     text-align: center;
     margin: 0 5%;
-    box-shadow: 0 15px 40px rgba(139, 168, 136, 0.15);
+    box-shadow: 0 15px 40px rgba(107, 66, 38, 0.15);
 }
 
 .savoir-bg {
@@ -622,7 +622,7 @@ img { max-width: 100%; height: auto; display: block; }
 .savoir-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(107, 133, 104, 0.8); /* beautiful sage green overlay */
+    background: rgba(142, 107, 83, 0.85); /* Warm pastel wood overlay */
     z-index: 2;
 }
 
@@ -643,7 +643,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .savoir-content .btn-primary {
-    background-image: url('../assets/img/wood-texture.png');
+    background-image: url('../assets/img/wood-texture-logo.png');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -651,7 +651,7 @@ img { max-width: 100%; height: auto; display: block; }
     text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 .savoir-content .btn-primary:hover {
-    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('../assets/img/wood-texture.png');
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../assets/img/wood-texture-logo.png');
 }
 
 /* ========================================================================= 
