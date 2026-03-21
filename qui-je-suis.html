@@ -62,6 +62,41 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            pointer-events: none; /* Prevent image ghost drag */
+        }
+        .zoom-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 38px;
+            height: 38px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 2;
+        }
+        .diploma-item:hover .zoom-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .diplomas-hint {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-style: italic;
+            margin-top: -20px;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .page-hero {
             position: relative;
@@ -248,6 +283,16 @@
             .lightbox-prev { left: 5px; }
             .lightbox-next { right: 5px; }
             .lightbox-content { max-width: 85%; }
+            .zoom-btn { 
+                opacity: 1; 
+                transform: none; 
+                width: 32px; height: 32px; 
+                font-size: 0.9rem;
+            }
+            .diplomas-hint {
+                font-size: 0.9rem;
+                padding: 0 15px;
+            }
         }
         @media (max-width: 480px) {
             .diplomas-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -336,30 +381,31 @@
                 <div class="diplomas-header reveal-up">
                     <h3 class="section-subtitle">Mon parcours</h3>
                     <h2 class="section-title">Diplômes & Certificats</h2>
+                    <p class="diplomas-hint"><i class="fa-solid fa-hand-pointer" style="color: var(--primary-color);"></i> Maintenez appuyé pour réorganiser, ou cliquez sur la loupe pour zoomer.</p>
                 </div>
                 
                 <!-- Grid -->
                 <!-- Removed reveal-scale completely -->
                 <div class="diplomas-grid">
-                    <div class="diploma-item" data-id="1" data-src="assets/img/dip1.webp"><img src="assets/img/dip1.webp" alt="Diplôme 1" loading="lazy"></div>
-                    <div class="diploma-item" data-id="2" data-src="assets/img/dip2.webp"><img src="assets/img/dip2.webp" alt="Diplôme 2" loading="lazy"></div>
-                    <div class="diploma-item" data-id="3" data-src="assets/img/dip3.webp"><img src="assets/img/dip3.webp" alt="Diplôme 3" loading="lazy"></div>
-                    <div class="diploma-item" data-id="4" data-src="assets/img/dip4.webp"><img src="assets/img/dip4.webp" alt="Diplôme 4" loading="lazy"></div>
-                    <div class="diploma-item" data-id="5" data-src="assets/img/dip5.webp"><img src="assets/img/dip5.webp" alt="Diplôme 5" loading="lazy"></div>
-                    <div class="diploma-item" data-id="6" data-src="assets/img/dip6.webp"><img src="assets/img/dip6.webp" alt="Diplôme 6" loading="lazy"></div>
-                    <div class="diploma-item" data-id="7" data-src="assets/img/dip7.webp"><img src="assets/img/dip7.webp" alt="Diplôme 7" loading="lazy"></div>
-                    <div class="diploma-item" data-id="8" data-src="assets/img/dip8.webp"><img src="assets/img/dip8.webp" alt="Diplôme 8" loading="lazy"></div>
-                    <div class="diploma-item" data-id="9" data-src="assets/img/dip9.webp"><img src="assets/img/dip9.webp" alt="Diplôme 9" loading="lazy"></div>
-                    <div class="diploma-item" data-id="10" data-src="assets/img/dip10.webp"><img src="assets/img/dip10.webp" alt="Diplôme 10" loading="lazy"></div>
-                    <div class="diploma-item" data-id="11" data-src="assets/img/dip11.webp"><img src="assets/img/dip11.webp" alt="Diplôme 11" loading="lazy"></div>
-                    <div class="diploma-item" data-id="12" data-src="assets/img/dip12.webp"><img src="assets/img/dip12.webp" alt="Diplôme 12" loading="lazy"></div>
-                    <div class="diploma-item" data-id="13" data-src="assets/img/dip13.webp"><img src="assets/img/dip13.webp" alt="Diplôme 13" loading="lazy"></div>
-                    <div class="diploma-item" data-id="14" data-src="assets/img/dip14.webp"><img src="assets/img/dip14.webp" alt="Diplôme 14" loading="lazy"></div>
-                    <div class="diploma-item" data-id="15" data-src="assets/img/dip15.webp"><img src="assets/img/dip15.webp" alt="Diplôme 15" loading="lazy"></div>
-                    <div class="diploma-item" data-id="16" data-src="assets/img/dip16.webp"><img src="assets/img/dip16.webp" alt="Diplôme 16" loading="lazy"></div>
-                    <div class="diploma-item" data-id="17" data-src="assets/img/dip17.webp"><img src="assets/img/dip17.webp" alt="Diplôme 17" loading="lazy"></div>
-                    <div class="diploma-item" data-id="18" data-src="assets/img/dip18.webp"><img src="assets/img/dip18.webp" alt="Diplôme 18" loading="lazy"></div>
-                    <div class="diploma-item" data-id="19" data-src="assets/img/dip19.webp"><img src="assets/img/dip19.webp" alt="Diplôme 19" loading="lazy"></div>
+                    <div class="diploma-item" data-id="1" data-src="assets/img/dip1.webp"><img src="assets/img/dip1.webp" alt="Diplôme 1" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="2" data-src="assets/img/dip2.webp"><img src="assets/img/dip2.webp" alt="Diplôme 2" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="3" data-src="assets/img/dip3.webp"><img src="assets/img/dip3.webp" alt="Diplôme 3" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="4" data-src="assets/img/dip4.webp"><img src="assets/img/dip4.webp" alt="Diplôme 4" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="5" data-src="assets/img/dip5.webp"><img src="assets/img/dip5.webp" alt="Diplôme 5" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="6" data-src="assets/img/dip6.webp"><img src="assets/img/dip6.webp" alt="Diplôme 6" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="7" data-src="assets/img/dip7.webp"><img src="assets/img/dip7.webp" alt="Diplôme 7" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="8" data-src="assets/img/dip8.webp"><img src="assets/img/dip8.webp" alt="Diplôme 8" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="9" data-src="assets/img/dip9.webp"><img src="assets/img/dip9.webp" alt="Diplôme 9" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="10" data-src="assets/img/dip10.webp"><img src="assets/img/dip10.webp" alt="Diplôme 10" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="11" data-src="assets/img/dip11.webp"><img src="assets/img/dip11.webp" alt="Diplôme 11" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="12" data-src="assets/img/dip12.webp"><img src="assets/img/dip12.webp" alt="Diplôme 12" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="13" data-src="assets/img/dip13.webp"><img src="assets/img/dip13.webp" alt="Diplôme 13" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="14" data-src="assets/img/dip14.webp"><img src="assets/img/dip14.webp" alt="Diplôme 14" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="15" data-src="assets/img/dip15.webp"><img src="assets/img/dip15.webp" alt="Diplôme 15" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="16" data-src="assets/img/dip16.webp"><img src="assets/img/dip16.webp" alt="Diplôme 16" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="17" data-src="assets/img/dip17.webp"><img src="assets/img/dip17.webp" alt="Diplôme 17" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="18" data-src="assets/img/dip18.webp"><img src="assets/img/dip18.webp" alt="Diplôme 18" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="19" data-src="assets/img/dip19.webp"><img src="assets/img/dip19.webp" alt="Diplôme 19" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
                 </div>
             </div>
         </section>
