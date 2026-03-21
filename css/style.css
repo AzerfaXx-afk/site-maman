@@ -90,9 +90,10 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .scroll-dot.active {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 10px rgba(139, 168, 136, 0.4);
+    background-image: url('../assets/img/wood-texture.png');
+    background-size: cover;
+    border-color: transparent;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
     transform: scale(1.3);
 }
 
@@ -228,17 +229,17 @@ img { max-width: 100%; height: auto; display: block; }
 .navbar:not(.scrolled) .nav-socials a:hover { background: var(--primary-color); color: #fff; }
 
 /* ========================================================================= 
-   BUTTONS (Wood Texture Theme)
+   BUTTONS
    ========================================================================= */
 .btn {
     display: inline-block;
-    padding: 14px 32px;
-    border-radius: 40px;
+    padding: 12px 28px;
+    border-radius: 30px;
     font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 600;
+    letter-spacing: 1px;
+    font-weight: 500;
     cursor: pointer;
     transition: var(--transition-smooth);
     border: none;
@@ -247,64 +248,38 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .btn-primary {
-    /* Rich wooden texture simulation via gradient and inner shadow */
-    background: linear-gradient(135deg, #D4A373 0%, #A67B5B 100%);
+    background-image: url('../assets/img/wood-texture.png');
+    background-size: cover;
+    background-position: center;
     color: #fff;
     border: none;
-    box-shadow: 
-        inset 0 2px 4px rgba(255,255,255,0.3), /* subtle top highlight for 3D wood feel */
-        inset 0 -2px 5px rgba(0,0,0,0.2), /* shadow at bottom */
-        0 6px 15px rgba(166, 123, 91, 0.4); /* outer glow/drop shadow */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-}
-
-.btn-primary::before {
-    /* Subtle wooden grain pattern overlay (using repeating linear gradient for a fast CSS grain) */
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.03) 3px,
-        rgba(0, 0, 0, 0.03) 4px
-    );
-    pointer-events: none;
-    border-radius: 40px;
+    box-shadow: 0 4px 15px rgba(139, 168, 136, 0.3);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #C4915C 0%, #8C6546 100%);
-    transform: translateY(-3px);
-    box-shadow: 
-        inset 0 2px 4px rgba(255,255,255,0.2),
-        inset 0 -2px 5px rgba(0,0,0,0.3),
-        0 8px 20px rgba(166, 123, 91, 0.5);
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('../assets/img/wood-texture.png');
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 168, 136, 0.4);
     color: #fff;
-}
-
-.btn-primary:active {
-    transform: translateY(1px);
-    box-shadow: 
-        inset 0 2px 5px rgba(0,0,0,0.4),
-        0 2px 5px rgba(166, 123, 91, 0.3);
 }
 
 .btn-outline-primary {
     background: transparent;
-    color: #A67B5B;
-    border: 2px solid #A67B5B;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 15px rgba(166, 123, 91, 0.1);
 }
 
 .btn-outline-primary:hover {
-    background: linear-gradient(135deg, #D4A373 0%, #A67B5B 100%);
+    background-image: url('../assets/img/wood-texture.png');
+    background-size: cover;
+    background-position: center;
     color: #fff;
     border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(166, 123, 91, 0.4);
+    box-shadow: 0 4px 15px rgba(139, 168, 136, 0.3);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 /* Adjustment for transparent navbar button */
@@ -313,8 +288,11 @@ img { max-width: 100%; height: auto; display: block; }
     border-color: #fff;
 }
 .navbar:not(.scrolled) .btn-outline-primary:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
+    background-image: url('../assets/img/wood-texture.png');
+    background-size: cover;
+    background-position: center;
+    border-color: transparent;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     color: #fff;
 }
 
@@ -465,8 +443,11 @@ img { max-width: 100%; height: auto; display: block; }
 
 .nature-accent-box {
     position: absolute; top: 30px; left: -30px; width: 100%; height: 100%;
-    border: 2px solid var(--accent-color); z-index: 1; border-radius: 8px;
-    background-color: rgba(194, 149, 110, 0.05);
+    border: none; z-index: 1; border-radius: 8px;
+    background-image: url('../assets/img/wood-texture.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .about-text p { margin-bottom: 20px; font-size: 1.05rem; color: var(--color-text); }
@@ -662,12 +643,15 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .savoir-content .btn-primary {
-    background: #fff;
-    color: var(--primary-dark);
-    border-color: #fff;
+    background-image: url('../assets/img/wood-texture.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    border: none;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 .savoir-content .btn-primary:hover {
-    background: var(--color-bg);
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('../assets/img/wood-texture.png');
 }
 
 /* ========================================================================= 

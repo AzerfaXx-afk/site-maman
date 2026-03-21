@@ -35,26 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Initialize GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Advanced Storytelling Parallax & Slow Zoom for Hero
-    const heroTl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        }
-    });
-    
-    // Parallax effect on scroll
-    heroTl.to('.hero-img', {
-        yPercent: 30,
-        ease: "none"
-    }, 0);
-    
-    // Slow breathing zoom independent of scroll
+    // Initial Hero Animation
     gsap.to('.hero-img', {
-        scale: 1.1,
-        duration: 30,
+        scale: 1.15,
+        duration: 20,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut"
@@ -129,32 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         )
-    });
-
-    // Storytelling Parallax for Detail Images
-    gsap.utils.toArray('.detail-img-wrapper img').forEach(img => {
-        gsap.to(img, {
-            yPercent: 15,
-            ease: "none",
-            scrollTrigger: {
-                trigger: img.parentElement,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-    });
-
-    // Storytelling Parallax for Contact Background
-    gsap.to('.savoir-bg', {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".savoir-plus",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-        }
     });
 
     // Smooth Scrolling for anchor links
