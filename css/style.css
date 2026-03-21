@@ -228,17 +228,17 @@ img { max-width: 100%; height: auto; display: block; }
 .navbar:not(.scrolled) .nav-socials a:hover { background: var(--primary-color); color: #fff; }
 
 /* ========================================================================= 
-   BUTTONS
+   BUTTONS (Wood Texture Theme)
    ========================================================================= */
 .btn {
     display: inline-block;
-    padding: 12px 28px;
-    border-radius: 30px;
+    padding: 14px 32px;
+    border-radius: 40px;
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 500;
+    letter-spacing: 1.5px;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition-smooth);
     border: none;
@@ -247,32 +247,64 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .btn-primary {
-    background: var(--primary-color);
+    /* Rich wooden texture simulation via gradient and inner shadow */
+    background: linear-gradient(135deg, #D4A373 0%, #A67B5B 100%);
     color: #fff;
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 4px 15px rgba(139, 168, 136, 0.3);
+    border: none;
+    box-shadow: 
+        inset 0 2px 4px rgba(255,255,255,0.3), /* subtle top highlight for 3D wood feel */
+        inset 0 -2px 5px rgba(0,0,0,0.2), /* shadow at bottom */
+        0 6px 15px rgba(166, 123, 91, 0.4); /* outer glow/drop shadow */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.btn-primary::before {
+    /* Subtle wooden grain pattern overlay (using repeating linear gradient for a fast CSS grain) */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 3px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    border-radius: 40px;
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
-    border-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 168, 136, 0.4);
+    background: linear-gradient(135deg, #C4915C 0%, #8C6546 100%);
+    transform: translateY(-3px);
+    box-shadow: 
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -2px 5px rgba(0,0,0,0.3),
+        0 8px 20px rgba(166, 123, 91, 0.5);
     color: #fff;
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 
+        inset 0 2px 5px rgba(0,0,0,0.4),
+        0 2px 5px rgba(166, 123, 91, 0.3);
 }
 
 .btn-outline-primary {
     background: transparent;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    color: #A67B5B;
+    border: 2px solid #A67B5B;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(166, 123, 91, 0.1);
 }
 
 .btn-outline-primary:hover {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #D4A373 0%, #A67B5B 100%);
     color: #fff;
+    border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 168, 136, 0.3);
+    box-shadow: 0 8px 20px rgba(166, 123, 91, 0.4);
 }
 
 /* Adjustment for transparent navbar button */
