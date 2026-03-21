@@ -820,8 +820,8 @@ body.no-scroll { overflow: hidden; }
     .footer-links-group { flex-direction: column; gap: 40px; }
     
     /* Auto-show overlay on mobile scroll */
-    .technique-card.mobile-active .technique-overlay { opacity: 1; }
-    .technique-card.mobile-active .technique-img { transform: scale(1.05); }
+    .technique-card.mobile-active .technique-overlay { opacity: 1 !important; visibility: visible !important; }
+    .technique-card.mobile-active .technique-img { transform: scale(1.05) !important; }
 }
 
 @media (max-width: 480px) {

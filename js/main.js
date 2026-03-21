@@ -73,19 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
-    // 4.5 Mobile Auto-Hover for Technique Cards
-    const mobileCardsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('mobile-active');
-            } else {
-                entry.target.classList.remove('mobile-active');
-            }
+    // 4.5 Mobile Auto-Hover for Technique Cards (Using GSAP for reliability)
+    gsap.utils.toArray('.technique-card').forEach(card => {
+        ScrollTrigger.create({
+            trigger: card,
+            start: "top 75%",
+            end: "bottom 25%",
+            toggleClass: "mobile-active"
         });
-    }, { rootMargin: '-30% 0px -30% 0px' });
-
-    document.querySelectorAll('.technique-card').forEach(card => {
-        mobileCardsObserver.observe(card);
     });
 
     // 5. Smooth Scrolling for anchor links
