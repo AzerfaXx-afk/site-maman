@@ -4,16 +4,16 @@
   "description": "Cabinet de réflexologie et massage à Grasse par Stéphanie Bouteloup.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#070707",
-  "theme_color": "#D4AF37",
+  "background_color": "#FDFBF7",
+  "theme_color": "#8BA888",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "assets/img/logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/logo.png",
+      "src": "assets/img/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -4,13 +4,13 @@ const urlsToCache = [
   '/index.html',
   '/css/style.css',
   '/js/main.js',
-  '/logo.png',
-  '/landing.webp',
-  '/profile.webp',
-  '/imgscroll1.webp',
-  '/imgscroll2.webp',
-  '/imgscroll3.webp',
-  '/savoir plus.webp'
+  'assets/img/logo.png',
+  'assets/img/landing.webp',
+  'assets/img/profile.webp',
+  'assets/img/imgscroll1.webp',
+  'assets/img/imgscroll2.webp',
+  'assets/img/imgscroll3.webp',
+  'assets/img/savoir-plus.webp'
 ];
 
 self.addEventListener('install', event => {
