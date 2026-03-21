@@ -172,19 +172,27 @@
             visibility: hidden;
             transition: var(--transition-smooth);
         }
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
         .lightbox-content {
-            width: 95vw;
-            height: 95vh;
-            max-width: 1400px;
+            max-width: 95vw;
+            max-height: 95vh;
+            width: auto;
+            height: auto;
             object-fit: contain;
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             border-radius: 8px;
-            background: #fff; /* Diplomas almost always look better with a solid white backing if transparent */
+            background: #fff;
             padding: 10px;
+        }
+        .sortable-ghost {
+            opacity: 0.2;
+            background-color: #f4f4f4;
+            border: 2px dashed #ccc;
+        }
+        .sortable-drag {
+            cursor: grabbing !important;
+            box-shadow: 0 25px 50px rgba(193, 154, 107, 0.4) !important;
+            transform: scale(1.05) !important;
+            z-index: 100 !important;
         }
         .lightbox-close {
             position: absolute;
@@ -333,25 +341,25 @@
                 <!-- Grid -->
                 <!-- Removed reveal-scale completely -->
                 <div class="diplomas-grid">
-                    <div class="diploma-item" data-src="assets/img/dip1.webp"><img src="assets/img/dip1.webp" alt="Diplôme 1" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip2.webp"><img src="assets/img/dip2.webp" alt="Diplôme 2" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip3.webp"><img src="assets/img/dip3.webp" alt="Diplôme 3" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip4.webp"><img src="assets/img/dip4.webp" alt="Diplôme 4" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip5.webp"><img src="assets/img/dip5.webp" alt="Diplôme 5" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip6.webp"><img src="assets/img/dip6.webp" alt="Diplôme 6" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip7.webp"><img src="assets/img/dip7.webp" alt="Diplôme 7" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip8.webp"><img src="assets/img/dip8.webp" alt="Diplôme 8" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip9.webp"><img src="assets/img/dip9.webp" alt="Diplôme 9" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip10.webp"><img src="assets/img/dip10.webp" alt="Diplôme 10" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip11.webp"><img src="assets/img/dip11.webp" alt="Diplôme 11" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip12.webp"><img src="assets/img/dip12.webp" alt="Diplôme 12" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip13.webp"><img src="assets/img/dip13.webp" alt="Diplôme 13" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip14.webp"><img src="assets/img/dip14.webp" alt="Diplôme 14" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip15.webp"><img src="assets/img/dip15.webp" alt="Diplôme 15" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip16.webp"><img src="assets/img/dip16.webp" alt="Diplôme 16" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip17.webp"><img src="assets/img/dip17.webp" alt="Diplôme 17" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip18.webp"><img src="assets/img/dip18.webp" alt="Diplôme 18" loading="lazy"></div>
-                    <div class="diploma-item" data-src="assets/img/dip19.webp"><img src="assets/img/dip19.webp" alt="Diplôme 19" loading="lazy"></div>
+                    <div class="diploma-item" data-id="1" data-src="assets/img/dip1.webp"><img src="assets/img/dip1.webp" alt="Diplôme 1" loading="lazy"></div>
+                    <div class="diploma-item" data-id="2" data-src="assets/img/dip2.webp"><img src="assets/img/dip2.webp" alt="Diplôme 2" loading="lazy"></div>
+                    <div class="diploma-item" data-id="3" data-src="assets/img/dip3.webp"><img src="assets/img/dip3.webp" alt="Diplôme 3" loading="lazy"></div>
+                    <div class="diploma-item" data-id="4" data-src="assets/img/dip4.webp"><img src="assets/img/dip4.webp" alt="Diplôme 4" loading="lazy"></div>
+                    <div class="diploma-item" data-id="5" data-src="assets/img/dip5.webp"><img src="assets/img/dip5.webp" alt="Diplôme 5" loading="lazy"></div>
+                    <div class="diploma-item" data-id="6" data-src="assets/img/dip6.webp"><img src="assets/img/dip6.webp" alt="Diplôme 6" loading="lazy"></div>
+                    <div class="diploma-item" data-id="7" data-src="assets/img/dip7.webp"><img src="assets/img/dip7.webp" alt="Diplôme 7" loading="lazy"></div>
+                    <div class="diploma-item" data-id="8" data-src="assets/img/dip8.webp"><img src="assets/img/dip8.webp" alt="Diplôme 8" loading="lazy"></div>
+                    <div class="diploma-item" data-id="9" data-src="assets/img/dip9.webp"><img src="assets/img/dip9.webp" alt="Diplôme 9" loading="lazy"></div>
+                    <div class="diploma-item" data-id="10" data-src="assets/img/dip10.webp"><img src="assets/img/dip10.webp" alt="Diplôme 10" loading="lazy"></div>
+                    <div class="diploma-item" data-id="11" data-src="assets/img/dip11.webp"><img src="assets/img/dip11.webp" alt="Diplôme 11" loading="lazy"></div>
+                    <div class="diploma-item" data-id="12" data-src="assets/img/dip12.webp"><img src="assets/img/dip12.webp" alt="Diplôme 12" loading="lazy"></div>
+                    <div class="diploma-item" data-id="13" data-src="assets/img/dip13.webp"><img src="assets/img/dip13.webp" alt="Diplôme 13" loading="lazy"></div>
+                    <div class="diploma-item" data-id="14" data-src="assets/img/dip14.webp"><img src="assets/img/dip14.webp" alt="Diplôme 14" loading="lazy"></div>
+                    <div class="diploma-item" data-id="15" data-src="assets/img/dip15.webp"><img src="assets/img/dip15.webp" alt="Diplôme 15" loading="lazy"></div>
+                    <div class="diploma-item" data-id="16" data-src="assets/img/dip16.webp"><img src="assets/img/dip16.webp" alt="Diplôme 16" loading="lazy"></div>
+                    <div class="diploma-item" data-id="17" data-src="assets/img/dip17.webp"><img src="assets/img/dip17.webp" alt="Diplôme 17" loading="lazy"></div>
+                    <div class="diploma-item" data-id="18" data-src="assets/img/dip18.webp"><img src="assets/img/dip18.webp" alt="Diplôme 18" loading="lazy"></div>
+                    <div class="diploma-item" data-id="19" data-src="assets/img/dip19.webp"><img src="assets/img/dip19.webp" alt="Diplôme 19" loading="lazy"></div>
                 </div>
             </div>
         </section>
@@ -406,24 +414,25 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="js/main.js"></script> <!-- Reusing main.js for global reveals/hamburger -->
     
     <!-- About Page Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Lightbox & Draggable Logic
-            gsap.registerPlugin(Draggable);
-            
+            // Lightbox & Sortable Logic
             const lightbox = document.getElementById('diplomaLightbox');
             const lightboxImg = document.getElementById('lightboxImg');
             const closeLightbox = document.getElementById('closeLightbox');
-            const items = document.querySelectorAll('.diploma-item');
+            
+            // Re-select items after sorting for correct Lightbox functionality
+            const getItems = () => document.querySelectorAll('.diploma-item');
+            let items = getItems();
             const totalItems = items.length;
             let currentIndex = 0;
 
-            // EXPLICIT ENTRANCE ANIMATION: Guarantees visibility and opacity=1
+            // EXPLICIT ENTRANCE ANIMATION
             gsap.fromTo(items, 
                 { opacity: 0, scale: 0.5, y: 50 }, 
                 { opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.05, ease: 'back.out(1.5)', 
@@ -431,6 +440,30 @@
                 }
             );
             
+            // SORTABLE JS FOR APP-LIKE GRID REORDERING
+            const grid = document.querySelector('.diplomas-grid');
+            if(grid) {
+                // Initialize Sortable
+                const sortable = new Sortable(grid, {
+                    animation: 250,
+                    ghostClass: 'sortable-ghost',
+                    dragClass: 'sortable-drag',
+                    easing: "cubic-bezier(1, 0, 0, 1)",
+                    delay: 150, // Mobile safe dragging (wait slightly before drag starts to allow scroll)
+                    delayOnTouchOnly: true,
+                    onEnd: function (evt) {
+                        items = getItems(); // Update items array to match new DOM order
+                        // Reset to original order after 5s of inactivity
+                        if (window.resetGridTimeout) clearTimeout(window.resetGridTimeout);
+                        window.resetGridTimeout = setTimeout(() => {
+                            sortable.sort(initialOrder, true); // True = animate transition
+                            items = getItems(); // Refresh items again after reset
+                        }, 5000);
+                    }
+                });
+                const initialOrder = sortable.toArray();
+            }
+
             const updateLightboxImage = (index) => {
                 const src = items[index].getAttribute('data-src');
                 if(src) {
@@ -439,43 +472,15 @@
                 }
             };
 
-            // Enhance interactivity with Draggable
-            Draggable.create(".diploma-item", {
-                type: "x,y",
-                bounds: "body",
-                edgeResistance: 0.5,
-                zIndexBoost: false, // Manually handle z-index so we don't mess up grid permanently
-                onPress: function() {
-                    gsap.set(this.target, { zIndex: 100, scale: 1.05, boxShadow: "0 25px 50px rgba(193, 154, 107, 0.4)" });
-                    if(this.target.resetTimeout) {
-                        clearTimeout(this.target.resetTimeout);
-                    }
-                },
-                onRelease: function() {
-                    gsap.set(this.target, { scale: 1, boxShadow: "0 10px 25px rgba(0,0,0,0.05)" });
-                    const target = this.target;
-                    // Reset to original position after 5 seconds
-                    target.resetTimeout = setTimeout(() => {
-                        gsap.to(target, {
-                            x: 0, 
-                            y: 0, 
-                            duration: 1.2, 
-                            ease: "elastic.out(1, 0.5)",
-                            onComplete: () => {
-                                gsap.set(target, { clearProps: "zIndex" });
-                            }
-                        });
-                    }, 5000);
-                },
-                onClick: function(e) {
-                    // This is triggered only on single click, not on drag end!
-                    e.preventDefault();
-                    const index = Array.from(items).indexOf(this.target);
-                    if (index > -1) {
-                        currentIndex = index;
-                        updateLightboxImage(currentIndex);
-                        lightbox.classList.add('active');
-                    }
+            grid.addEventListener('click', (e) => {
+                const item = e.target.closest('.diploma-item');
+                if(!item) return;
+                e.preventDefault();
+                const index = Array.from(items).indexOf(item);
+                if (index > -1) {
+                    currentIndex = index;
+                    updateLightboxImage(currentIndex);
+                    lightbox.classList.add('active');
                 }
             });
 
