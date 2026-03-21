@@ -128,28 +128,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnInstall = document.getElementById('btnInstall');
     const closeInstall = document.getElementById('closeInstall');
 
+    // Show the custom toast automatically if not already installed
+    if (!isStandalone && installPrompt) {
+        setTimeout(() => {
+            installPrompt.classList.add('visible');
+        }, 3000);
+    }
+
+    // Capture the native Chrome install prompt event to use it later
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault(); // Prevent native mini-infobar
         deferredPrompt = e;
-        if(!localStorage.getItem('pwaPromptDismissed') && !isStandalone) {
-            setTimeout(() => {
-                if(installPrompt) installPrompt.classList.add('visible');
-            }, 3000);
-        }
     });
 
     if(btnInstall && closeInstall) {
         btnInstall.addEventListener('click', async () => {
             installPrompt.classList.remove('visible');
             if(deferredPrompt) {
+                // Native prompt on Android / Desktop
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 deferredPrompt = null;
+            } else {
+                // Manual instructions fallback (e.g. for iOS Safari)
+                alert("Sur iPhone/iPad : Appuyez sur l'icône de Partage en bas de l'écran ⍈, puis choisissez 'Sur l'écran d'accueil' ➕.");
             }
         });
+        
         closeInstall.addEventListener('click', () => {
+            // Only hides the prompt. Reappears upon page refresh!
             installPrompt.classList.remove('visible');
-            localStorage.setItem('pwaPromptDismissed', 'true');
         });
     }
 
