@@ -142,13 +142,16 @@
             margin-bottom: 10px;
         }
         .bio-section {
-            padding: 80px 0 60px;
+            padding: 40px 0 30px;
             background-color: var(--color-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         .bio-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 40px;
             align-items: center;
         }
         .bio-img-wrapper {
@@ -160,6 +163,7 @@
         .bio-img-wrapper img {
             width: 100%;
             height: auto;
+            max-height: 75vh;
             object-fit: cover;
             transition: transform 1s ease;
         }
@@ -167,18 +171,18 @@
             transform: scale(1.03);
         }
         .bio-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            line-height: 1.6;
             color: var(--color-text);
         }
         .bio-text p {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
         .bio-greeting {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-family: var(--font-heading);
             color: var(--primary-color);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             display: block;
         }
         .cta-disabled-section {
