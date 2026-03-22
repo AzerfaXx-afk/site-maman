@@ -56,6 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 3.5 Parallax Backgrounds
+    gsap.utils.toArray('.parallax-section').forEach(section => {
+        const bg = section.querySelector('.parallax-bg');
+        if (bg) {
+            gsap.to(bg, {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top bottom", 
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        }
+    });
+
     // 4. Grid Staggers (Techniques)
     gsap.utils.toArray('.techniques-grid').forEach(grid => {
         const items = grid.querySelectorAll('.reveal-scale');

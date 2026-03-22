@@ -77,57 +77,29 @@
             margin-top: 0;
         }
         
-        .parallax-banner {
+        .parallax-section {
             position: relative;
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            overflow: hidden;
         }
-        .parallax-banner::before {
-            content: '';
+        .parallax-bg {
             position: absolute;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(43, 29, 20, 0.6);
-            z-index: 1;
-        }
-        .parallax-content {
-            position: relative;
-            z-index: 2;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .img-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-        }
-        .img-grid-4 img {
+            top: -20%;
+            left: 0;
             width: 100%;
-            height: auto;
-            border-radius: 8px;
+            height: 140%;
             object-fit: cover;
-            aspect-ratio: 4/3;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1;
+            will-change: transform;
         }
         
         @media (max-width: 992px) {
             .page-title { font-size: 3.5rem; }
             .page-subtitle { font-size: 1.5rem; }
-            .img-grid-4 { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
             .page-title { font-size: 2.8rem; }
             .page-subtitle { font-size: 1.2rem; }
             .page-hero { height: 50vh; }
-            .parallax-banner { background-attachment: scroll; } /* Better on mobile */
         }
     </style>
 </head>
@@ -227,21 +199,26 @@
         </section>
 
         <!-- Parallax Banner: Bienfaits (ref3.webp) -->
-        <section class="parallax-banner reveal-group" style="background-image: url('assets/img/ref3.webp'); min-height: 70vh;">
-            <div class="container parallax-content reveal-up">
-                <h2 class="section-title" style="color: #fff; margin-bottom: 40px;">La réflexologie complète les autres soins apportés aux patients et permet :</h2>
-                <ul style="list-style-type: none; padding-left: 0; margin: 0 auto; line-height: 1.8; color: #fff; font-size: 1.15rem; max-width: 900px; text-align: left; column-count: 2; column-gap: 40px;">
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> D’obtenir le relâchement des tensions</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Redynamiser l’organisme</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer le sommeil</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Soulager la douleur</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer la circulation sanguine et lymphatique</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Favorise l’élimination des toxines</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Combat un état inflammatoire</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Procure une relaxation profonde</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliore les troubles fonctionnels en général</li>
-                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> D’Offrir une autre possibilité de mieux appréhender les traitements dans le cadre d’une prise en charge globale</li>
-                </ul>
+        <section class="parallax-section reveal-group" style="min-height: 70vh; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/img/ref3.webp" alt="Bienfaits" class="parallax-bg">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(43, 29, 20, 0.65); z-index: 2;"></div>
+            <div class="container reveal-up" style="position: relative; z-index: 3; padding: 60px 20px; text-align: center; width: 100%;">
+                <h2 style="color: #fff; font-family: var(--font-heading); font-size: 2.3rem; margin-bottom: 40px; text-transform: none; line-height: 1.3;">La réflexologie complète les autres soins<br>apportés aux patients et permet :</h2>
+                
+                <div style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px); border-radius: 15px; padding: 30px; max-width: 950px; margin: 0 auto; text-align: left; border: 1px solid rgba(255, 255, 255, 0.15);">
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.8; color: #fff; font-size: 1.15rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px 30px;">
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> D’obtenir le relâchement des tensions</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Redynamiser l’organisme</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer le sommeil</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Soulager la douleur</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer la circulation sanguine et lymphatique</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Favoriser l’élimination des toxines</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Combattre un état inflammatoire</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Procurer une relaxation profonde</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer les troubles fonctionnels en général</li>
+                        <li style="position: relative; padding-left: 30px; text-transform: none; letter-spacing: 0.5px; grid-column: 1 / -1;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Offrir une autre possibilité de mieux appréhender les traitements dans le cadre d’une prise en charge globale</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -333,7 +310,10 @@
         </section>
 
         <!-- Parallax Banner 2 (ref7.webp) -->
-        <section class="parallax-banner reveal-group" style="background-image: url('assets/img/ref7.webp'); min-height: 40vh;"></section>
+        <section class="parallax-section reveal-group" style="min-height: 50vh; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/img/ref7.webp" alt="Ambiance" class="parallax-bg">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(43, 29, 20, 0.3); z-index: 2;"></div>
+        </section>
 
         <!-- Section ROP 1 (ref8.webp) -->
         <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
@@ -392,14 +372,11 @@
             </div>
         </section>
 
-        <!-- ROP Grid Images (ref10, 11, 12, 13) -->
+        <!-- ROP Grid Images (ref10 only) -->
         <section class="section reveal-group" style="padding: 40px 0; background-color: var(--color-bg-light);">
-            <div class="container">
-                <div class="img-grid-4 reveal-up">
-                    <img src="assets/img/ref10.webp" alt="ROP illustration 1">
-                    <img src="assets/img/ref11.webp" alt="ROP illustration 2">
-                    <img src="assets/img/ref12.webp" alt="ROP illustration 3">
-                    <img src="assets/img/ref13.webp" alt="ROP illustration 4">
+            <div class="container" style="display: flex; justify-content: center;">
+                <div class="detail-img-wrapper reveal-scale" style="max-width: 650px; width: 100%;">
+                    <img src="assets/img/ref10.webp" alt="ROP illustration" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
                 </div>
             </div>
         </section>
