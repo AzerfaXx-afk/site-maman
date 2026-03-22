@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Réflexologie | Stéphanie Bouteloup</title>
+    <meta name="description" content="Découvrez les différentes techniques de réflexologie (plantaire, palmaire, faciale, occipito-podale) proposées par Stéphanie Bouteloup à Grasse.">
+    
+    <!-- PWA Requirements -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#C19A6B">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=3">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+
+    <style>
+        .page-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px; 
+        }
+        .page-hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        .page-hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            filter: brightness(0.9);
+        }
+        .page-hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(43, 29, 20, 0.5) 0%, rgba(43, 29, 20, 0.2) 40%, rgba(43, 29, 20, 0.1) 70%, var(--color-bg) 100%);
+            z-index: 2;
+        }
+        .page-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 50px;
+        }
+        .page-title {
+            font-size: 4.5rem;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-style: italic;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 5px;
+        }
+        .page-subtitle {
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            font-family: var(--font-heading);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            margin-top: 0;
+        }
+        
+        .parallax-banner {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .parallax-banner::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(43, 29, 20, 0.6);
+            z-index: 1;
+        }
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .img-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .img-grid-4 img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            aspect-ratio: 4/3;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 992px) {
+            .page-title { font-size: 3.5rem; }
+            .page-subtitle { font-size: 1.5rem; }
+            .img-grid-4 { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.8rem; }
+            .page-subtitle { font-size: 1.2rem; }
+            .page-hero { height: 50vh; }
+            .parallax-banner { background-attachment: scroll; } /* Better on mobile */
+        }
+    </style>
+</head>
+<body>
+    <!-- Pull to Refresh Background Container -->
+    <div class="ptr-container">
+        <div class="ptr-logo-wrapper">
+            <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand-logo">
+            <img src="assets/img/logo.png" alt="Stéphanie Bouteloup Logo" class="nav-brand-img" style="width: 50px; height: 50px;">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="qui-je-suis.html">Qui je suis</a>
+            <a href="massages.html">Massages</a>
+            <a href="reflexologie.html" class="active">Réflexologie</a>
+            <div class="nav-socials fade-up">
+                <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+        </div>
+    </nav>
+
+    <!-- Main App Wrapper -->
+    <div id="app-wrapper">
+    <div id="page-content">
+
+        <!-- Page Hero (ref1.webp) -->
+        <header class="page-hero">
+            <div class="page-hero-bg">
+                <div class="page-hero-overlay"></div>
+                <img src="assets/img/ref1.webp" alt="Réflexologie" class="page-hero-img">
+            </div>
+            
+            <div class="page-hero-content">
+                <h1 class="page-title fade-up">Réflexologie</h1>
+                <p class="page-subtitle fade-up delay-1">Présentation & Techniques</p>
+            </div>
+            <a href="#intro" class="chevron-down-arrow chevron-hero"><i class="fa-solid fa-chevron-down"></i></a>
+        </header>
+
+        <!-- Intro Section : Qu'est-ce que la Réflexologie? -->
+        <section id="intro" class="section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light); display: flex; flex-direction: column; justify-content: center;">
+            <div class="container" style="max-width: 900px; text-align: center;">
+                <h2 class="section-title text-center" style="margin-bottom: 30px;">Qu’est-ce que la Réflexologie ?</h2>
+                <div class="service-content-body" style="text-align: left;">
+                    <p style="text-align: center;">L’ordre national des médecins décline les médecines alternatives et complémentaires en quatre catégories :</p>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 25px auto; line-height: 1.6; color: var(--color-text); max-width: 700px;">
+                        <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i> <strong>Les thérapies manuelles :</strong> chiropraxie, kinésiologie, réflexologie, ostéopathie</li>
+                        <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i> <strong>Les thérapies corps & esprit :</strong> sophrologie, hypnose, PNL</li>
+                        <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i> <strong>Les thérapies biologiques :</strong> aromathérapie, phytothérapie, gemmothérapie</li>
+                        <li style="margin-bottom: 12px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i> <strong>Les systèmes complets :</strong> homéopathie, acupuncture, naturopathie</li>
+                    </ul>
+                    <p style="text-align: center;">Les médecines alternatives peuvent être recommandées par les praticiens pour aider le malade à supporter les effets secondaires causés par de lourds traitements comme la chimiothérapie ou radiothérapie.</p>
+                    <p style="text-align: center;">La réflexologie est une méthode qui repose sur des pressions exercées sur différentes régions du pied, des mains, des oreilles, du corps, du visage et de la tête.<br>
+                    C’est un outil qui par le toucher a une influence sur les émotions. Incroyablement détendant, le soin permet d’activer la circulation sanguine, effaçant les contraintes de la journée.</p>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="https://www.france-assos-sante.org/2018/05/31/de-quoi-les-medecines-complementaires-et-alternatives-sont-elles-le-nom/" target="_blank" rel="noopener noreferrer" class="link-primary" style="font-size: 1.1rem;">
+                            En savoir plus : De quoi les médecines complémentaires et alternatives sont-elles le nom ? <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section En pratique -->
+        <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse" style="align-items: center;">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">En pratique : Comment se déroule un rendez-vous ?</h2>
+                    <div class="service-content-body">
+                        <p><strong>L’accueil :</strong> c’est le temps de l’écoute, qui permet de mieux connaitre la personne, comprendre le contexte des difficultés qui l’amènent à prendre un rendez-vous. La discussion permet de découvrir son histoire médicale et sa problématique du moment. C’est aussi un temps de partage durant lequel se crée une confiance mutuelle, car la séance ne peut exister pleinement qu’avec ce partenariat soignant/soigné.</p>
+                        <p><strong>La séance :</strong> elle débute par une prise de contact sur les pieds ou les mains, puis continue avec des pressions plus ou moins appuyées selon un protocole élaboré au fur et à mesure de la séance et en fonction de ce qui s’est dit au moment de l’accueil. La palpation des zones réflexes permet de situer une perturbation ou un déséquilibre, puis la stimulation manuelle des zones va permettre de moduler la sensation de la douleur et entrainer la sécrétion d’endorphines naturelles.</p>
+                        <p>Une meilleure régulation des systèmes nerveux para et sympathiques peut s’opérer, avec de façon constante une implication du consultant. Celui-ci en effet participe de façon active à son propre mieux-être, en exprimant les sensations ressenties, et les modifications de celles-ci au fil de la ou les séances.<br>
+                        En outre, une implication inconsciente est également présente, car les capacités d’auto-guérison sont stimulées. Certaines zones réflexes peuvent être sensibles, c’est normal, c’est le signe qu’un rééquilibrage est nécessaire.</p>
+                        <p><strong>Un temps de parole en fin de séance :</strong> permet de recueillir des informations de ressenti. Il est possible de se sentir fatigué, avoir des frissons, ou un sentiment de grande détente. N’hésitez pas à me faire part de vos ressentis.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <img src="assets/img/ref2.webp" alt="Déroulement d'un rendez-vous">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parallax Banner: Bienfaits (ref3.webp) -->
+        <section class="parallax-banner reveal-group" style="background-image: url('assets/img/ref3.webp'); min-height: 70vh;">
+            <div class="container parallax-content reveal-up">
+                <h2 class="section-title" style="color: #fff; margin-bottom: 40px;">La réflexologie complète les autres soins apportés aux patients et permet :</h2>
+                <ul style="list-style-type: none; padding-left: 0; margin: 0 auto; line-height: 1.8; color: #fff; font-size: 1.15rem; max-width: 900px; text-align: left; column-count: 2; column-gap: 40px;">
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> D’obtenir le relâchement des tensions</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Redynamiser l’organisme</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer le sommeil</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Soulager la douleur</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliorer la circulation sanguine et lymphatique</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Favorise l’élimination des toxines</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Combat un état inflammatoire</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Procure une relaxation profonde</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> Améliore les troubles fonctionnels en général</li>
+                    <li style="margin-bottom: 12px; position: relative; padding-left: 30px; break-inside: avoid;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 6px; color: var(--primary-color);"></i> D’Offrir une autre possibilité de mieux appréhender les traitements dans le cadre d’une prise en charge globale</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section Plantaire (ref4.webp) -->
+        <section class="detail-section section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light);">
+            <div class="container detail-container">
+                <div class="detail-text reveal-right">
+                    <h2 class="section-title">Réflexologie plantaire</h2>
+                    <div class="service-content-body">
+                        <p>La réflexologie est une technique de soin issue de la médecine chinoise.<br>
+                        L’étymologie du mot « pied » en chinois signifie littéralement « partie du corps qui sauvegarde la santé ».</p>
+                        <p>C’est une méthode de digito-pression basée sur la régulation du système nerveux, qui se pratique sur les zones du corps les plus riches en récepteurs épidermiques : pieds, mains, visage, oreilles. Chaque zone corporelle, organe ou glande a sa correspondance. Grace aux stimuli envoyés via des pressions sur la peau, le système nerveux apporte des réponses physiologiques qui peuvent être d’ordre moteur, glandulaire ou viscéral.</p>
+                        <p>Très efficace dans la régulation du système nerveux, la réflexologie plantaire est la plus appropriée pour les troubles fonctionnels chroniques.</p>
+                        <p>Une séance dure en moyenne 1 heure. Dès le début de séance, les premières minutes permettent d’exercer des pressions plus ou moins appuyées, ces pressions mènent à l’activation du système veineux et lymphatique et apportent détente et relaxation profonde.<br>
+                        Le nombre de séances nécessaires et leur fréquence dépendent du trouble et de la réceptivité de chacun.</p>
+                        
+                        <h4 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary-color); margin-top: 15px; margin-bottom:10px;">Ses bienfaits :</h4>
+                        <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.5;">
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Maux du dos :</strong> soulage les tensions, les douleurs articulaires</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Détente profonde :</strong> aide à lutter contre les troubles du sommeil, la dépression, les maux de tête, évacuation du stress</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Dynamise l’organisme :</strong> aide à lutter contre rhumes, états grippaux, asthme</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Harmonise les activités vitales :</strong> désordres intestinaux, gastriques</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Circulation :</strong> Améliore la circulation sanguine et lymphatique</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Toxines :</strong> Favorise l’élimination des toxines</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Équilibre hormonal :</strong> syndrome prémenstruel, bouffées de chaleur, irritabilité</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Décontracte les muscles :</strong> lutte contre la spasticité, les courbatures</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i><strong>Addictions :</strong> Aide à sortir des addictions (tabac, alcool, boulimie)</li>
+                        </ul>
+
+                        <p style="margin-top: 15px; font-style: italic;">Le pied est la représentation miniature du corps où chaque point correspond à un organe ou une partie du corps. Le pied gauche correspond à la partie gauche du corps et le pied droit à la partie droite.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left" style="height: auto;">
+                    <img src="assets/img/ref4.webp" alt="Réflexologie Plantaire">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Palmaire (ref5.webp) -->
+        <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">Réflexologie Palmaire</h2>
+                    <div class="service-content-body">
+                        <p>Comme pour les pieds, la réflexologie palmaire apporte détente et bien-être.</p>
+                        <p>Les zones réflexes se situent à la fois dans la paume, sur les doigts et le dessus des deux mains.</p>
+                        <p>Elle se pratique assise confortablement dans un fauteuil relax ou sur la table de massage.</p>
+                        <p>Elle est principalement indiquée pour les personnes âgées, les enfants ou toute personne qui ne peut pas recevoir de réflexologie plantaire.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <img src="assets/img/ref5.webp" alt="Réflexologie Palmaire">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Faciale (ref6.webp) -->
+        <section class="detail-section section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light);">
+            <div class="container detail-container">
+                <div class="detail-text reveal-right">
+                    <h2 class="section-title">Réflexologie Faciale</h2>
+                    <div class="service-content-body">
+                        <p>La réflexologie faciale est une technique de réflexologie à part entière qui utilise comme micro-système, le visage ou différentes parties du visage et de la tête : le nez, le menton, les oreilles, l’arcade sourcilière…<br>
+                        Chaque point réflexe est un émetteur-récepteur vers l’organe ou la partie du corps correspondant et intervient tant dans le processus de traitement que d’autorégulation.</p>
+                        
+                        <p>La forme la plus connue a été développée au Vietnam dans les années 80 par le professeur Buy Quôc Châu et s’appelle le « Dien Chan », traduction vietnamienne de « réflexologie faciale ». Cette forme de réflexologie qui se pratique avec des outils utilise plus de 500 points réflexes répertoriés sur le visage et le crâne. Elle est pratiquée en sessions de courte durée et donne des résultats à court terme, voire immédiats (en matière de prise en charge de la douleur notamment).</p>
+                        
+                        <p>Le visage est une zone réflexogène importante. C’est la partie du corps la plus animée.<br>
+                        La réflexologie faciale soulage les maux de tête, les migraines, les douleurs neurologiques de la face. Sur le plan biologique, en stimulant des nerfs en lien avec divers organes, la réaction entraine la production d’endorphines et accroît la circulation de la lymphe dans l’organisme. On observe aussi d’excellents résultats dans le traitement de troubles musculaires et articulaires comme les torticolis, les crampes, les lumbagos ou sciatiques.</p>
+                        
+                        <p>L’utilisation de cartes permet de stimuler avec précision les zones prédéfinies pour le soin.</p>
+                        
+                        <h4 style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary-color); margin-top: 15px; margin-bottom:10px;">Agit sur :</h4>
+                        <ul style="list-style-type: none; padding-left: 0; margin: 0; line-height: 1.5;">
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>Douleurs articulaires et musculaires</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>Gestion du stress et de l’anxiété (idéal en complément d’une séance de sophrologie ou d’hypnose)</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>Céphalées de tension, migraines et maux de tête</li>
+                            <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>Fatigue et troubles du sommeil</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left">
+                    <img src="assets/img/ref6.webp" alt="Réflexologie Faciale">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parallax Banner 2 (ref7.webp) -->
+        <section class="parallax-banner reveal-group" style="background-image: url('assets/img/ref7.webp'); min-height: 40vh;"></section>
+
+        <!-- Section ROP 1 (ref8.webp) -->
+        <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">Réflexologie Occipito-Podale (ROP)</h2>
+                    <div class="service-content-body">
+                        <p>La Réflexologie occipito-podale a été créée et enseignée par Guy Boitout (ostéopathe DO) et Jean Pierre Vadala (kinésithérapeute DE). Elle propose une cartographie du corps en 3D qui, contrairement aux cartes classiques (en 2D), offre une vision anatomique beaucoup plus précise et ouvre ainsi un plus large champ curatif.</p>
+                        
+                        <p><strong>Nouvelle théorie :</strong> à la place de la théorie des dépôts cristallins de Madame Ingham, Jean-Pierre Vadala et Guy Boitout proposent la théorie de la projection réflexe topique électrochimique de similitude (inspiration des travaux du Professeur Jean Bossy - "Les bases neurologiques des réflexothérapies - Maloine 1983). La description des différents arcs réflexes reliant les différentes parties du corps innervées, le cerveau sous-cortical et cortical, les couches épidermo-dermiques podales et l'occiput, sont désormais bien connus.</p>
+                        
+                        <p><strong>La technique de visualisation :</strong> à la place de la cartographie plane d'Ingham, Jean-Pierre Vadala et Guy Boitout proposent une cartographie en 3D (chaque partie du corps est visualisée projetée en 3D sur des repères osseux fiables du pied). Une fois rassemblés, tous les clichés ainsi formatés, les 2 pieds réunis laissent apparaître un bébé en siège décomplété dans le ventre de sa mère.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <figure style="margin: 0; width: 100%;">
+                        <img src="assets/img/ref8.webp" alt="Réflexologie ROP">
+                        <figcaption style="text-align: center; font-style: italic; color: var(--color-text-muted); margin-top: 10px; font-size: 0.9rem;">Ceinture Pelvienne Plan Sagittal Latéral</figcaption>
+                    </figure>
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section ROP 2 (ref9.webp & text) -->
+        <section class="detail-section section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light);">
+            <div class="container detail-container">
+                <div class="detail-text reveal-right">
+                    <div class="service-content-body">
+                        <h4 style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--primary-color); margin-bottom: 15px;">Une nouvelle cartographie réflexe du pied :</h4>
+                        <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6;">
+                            <li style="margin-bottom: 10px;">La colonne vertébrale et son contenu neurologique cérébro-spinal et neuro-végétatif</li>
+                            <li style="margin-bottom: 10px;">Le thorax avec ses articulations vertébro-costo-tranversaires et sterno-chondro-costales</li>
+                            <li style="margin-bottom: 10px;">Les organes intra-pelviens bien différenciés</li>
+                            <li style="margin-bottom: 10px;">Les os du crâne, les membranes dure-mèriennes (faux du cerveau et du cervelet, tente du cervelet), la symphyse sphéno-basilaire, les orifices de la base du crâne et leurs nerfs crâniens respectifs, les centres neuro-hormonaux sous cortico, sont désormais accessibles</li>
+                        </ul>
+
+                        <p><strong>Le cadre réflexe occipital :</strong> témoin du passage des informations périphériques circulant dans la substance réticulée.<br>
+                        Les zones réflexes utilisées sont inspirées des lignes périostées du chiropracteur américain Bertrand Dejarnet. Elles sont d'un grand intérêt diagnostique et thérapeutique.</p>
+
+                        <p><strong>La technique de massage :</strong> à la place de la technique par trituration rotatoire d'Ingham, Jean-Pierre Vadala et Guy Boitout utilisent une technique de diagnostic et de traitement des zones similinum réflexes au niveau de la couche épidermo-dermique des pieds.</p>
+
+                        <p><strong>La loi de Hering :</strong> indispensable fil conducteur de la méthode (loi bien connue des homéopathes unicistes)</p>
+
+                        <p><strong>Le mécanisme crânio-sacré et le MRP (Mécanisme Respiratoire Primaire) :</strong> chers aux ostéopathes. Ils trouvent également leur application dans cette méthode.</p>
+
+                        <p><strong>Les niveaux de l'être humain :</strong> la projection réflexe sur les pieds des 3 diaphragmes (périnée, thoraciques et crânien, et des viscères qu'ils sous tendent ou qui s'y suspendent, réalisent les 3 niveaux de l'être.</p>
+
+                        <p><strong>Intérêt, but :</strong> basée sur le principe de l'action/réaction et de la rétroaction/action positive, la réflexologie Occipito-Podale est non agressive. La technique de massage est non douloureuse, le toucher permet de stimuler les facultés d’auto-régulation que nous possédons, en apportant un réel soutien et en aidant notre corps à retrouver son équilibre.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left">
+                    <img src="assets/img/ref9.webp" alt="Cartographie Réflexe ROP">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROP Grid Images (ref10, 11, 12, 13) -->
+        <section class="section reveal-group" style="padding: 40px 0; background-color: var(--color-bg-light);">
+            <div class="container">
+                <div class="img-grid-4 reveal-up">
+                    <img src="assets/img/ref10.webp" alt="ROP illustration 1">
+                    <img src="assets/img/ref11.webp" alt="ROP illustration 2">
+                    <img src="assets/img/ref12.webp" alt="ROP illustration 3">
+                    <img src="assets/img/ref13.webp" alt="ROP illustration 4">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Verticale (ref14.webp) -->
+        <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">Réflexologie verticale</h2>
+                    <h3 class="section-subtitle" style="font-size: 1.2rem; color: var(--color-text-muted); margin-bottom: 20px;">La réflexologie verticale ou VRT, méthode élaborée par Lynne Booth</h3>
+                    <div class="service-content-body">
+                        <p>La VRT (Vertical Reflexology Therapy) est une méthode anglaise internationalement connue et pratiquée. Unique en son genre, elle est à la fois originale par son approche et par ses techniques. Ce type de réflexologie, dite « en appui », s’effectue à l’aide du poids du corps de la personne.</p>
+                        <p>L’explication anatomique d’efficacité de la VRT repose sur le fait que les nerfs sont naturellement « désensibilisés » mais, lorsque le poids du corps intervient en appui (sur les mains/pieds) ces mêmes nerfs deviennent sensibles. Cela indique donc qu’un « réflexe sensibilisé » puisse transmettre une impulsion énergétique de « guérison » ou de « réparation » plus forte à un organe, une glande, un muscle ou au système osseux.</p>
+                        <p>La réflexologie Verticale identifie des zones réflexes de la cheville désignées par des déclencheurs zonaux (zonal triggers) qui lorsqu’elles sont utilisées de concert avec des zones réflexes spécifiques de la main et du pied, permettent d’accélérer le processus naturel de guérison.</p>
+                        <p>Cette méthode permet de travailler plus en profondeur les zones réflexes, tout en s’adaptant parfaitement à tous les types de public.</p>
+                        <p>La VRT vient compléter et enrichir la pratique de la réflexologie de base et la rendre d’autant plus efficace.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <img src="assets/img/ref14.webp" alt="Réflexologie Verticale">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Avancées (ref15.webp) -->
+        <section class="detail-section section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light);">
+            <div class="container detail-container">
+                <div class="detail-text reveal-right">
+                    <h2 class="section-title">Techniques avancées de réflexologie</h2>
+                    <div class="service-content-body">
+                        <p>L’ART est une technique dérivée de la méthode Ingham mise au point par Tony Porter, lui-même formé à l’ortho-bionomy et à réflexologie par Dwight Byers (Directeur de l’institut international de Réflexologie en Floride) qui devint son ami. Dwight Byers est le neveu d’Eunice Ingham, la « mère de la réflexologie moderne ».</p>
+                        
+                        <p>La technique est plutôt un toucher « glissé » qu’une reptation (toucher en exerçant des pressions et relâcher). Une pression continue peut également être maintenue sur une zone réflexe perturbée ou une pression circulaire peut être exercée. Cela peut être intégré à une séance habituelle. On utilise aussi d’autres parties des mains comme les articulations pour pratiquer les contacts.</p>
+                        
+                        <p>Le changement continuel de pied permet d’équilibrer le traitement. Une zone réflexe perturbée stimulée en continu, sans pause, ne peut pas se détendre et reste douloureuse. Par contre, si on interrompt le travail sur une zone pour en traiter une autre, puisque l’on revient sur le réflexe initial, en plusieurs passages séparés par une pause, on obtient de très bons résultats.</p>
+                        
+                        <p>Cette approche permet de détecter les zones réflexes perturbées, et d’y appliquer le contact approprié.</p>
+                        
+                        <p>Le travail sur la triade (cou-nuque, abdomen et pieds) permet de débloquer les zones de tensions d’une manière totalement passive et peut provoquer une libération profonde au niveau physique et émotionnel.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left">
+                    <img src="assets/img/ref15.webp" alt="Techniques avancées">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-brand">
+                    <a href="index.html#accueil"><img src="assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
+                    <h3>Stéphanie Bouteloup</h3>
+                    <p>Réflexologue titre rncp à Grasse</p>
+                    
+                    <div class="footer-socials">
+                        <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                        <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-group">
+                    <div class="footer-links">
+                        <h4>Certifications & Liens</h4>
+                        <a href="https://www.reflexobreton.fr/" target="_blank" rel="noopener" class="footer-link-text">Reflexo Breton</a>
+                        <a href="https://www.francecompetences.fr/recherche/rncp/23816/" target="_blank" rel="noopener" class="footer-link-text">France Compétences RNCP</a>
+                        <a href="https://www.reflexologues-rncp.com/" target="_blank" rel="noopener" class="footer-link-text">Réflexologues RNCP</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem; display: block; margin-bottom: 5px;">
+                            <a href="tel:+33628388349" class="footer-link-text">06.28.38.83.49.</a>
+                        </span>
+                        <a href="mailto:phanybox@gmail.com" class="footer-link-text" style="text-transform: none;">phanybox@gmail.com</a>
+                    </div>
+                    <div class="footer-cta" style="display: flex; align-items: flex-end; padding-bottom: 10px;">
+                        <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 30px; padding-top: 20px; padding-bottom: 10px; color: var(--color-text-muted); font-size: 0.9rem; font-style: italic;">
+                Site créé par Adam Bouteloup 
+                <a href="https://www.instagram.com/adam_btp" target="_blank" rel="noopener" style="color: var(--primary-color); margin-left: 8px; font-size: 1.2rem; vertical-align: middle;"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </footer>
+
+    </div> <!-- End Page Content -->
+    </div> <!-- End App Wrapper -->
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        <div class="pwa-content">
+            <img src="assets/img/logo.png" alt="S. Bouteloup">
+            <div class="pwa-text">
+                <strong>Prendre RDV plus vite ?</strong>
+                <p>Installez l'App : réservez vos séances quand vous voulez, en 1 seul clic.</p>
+            </div>
+        </div>
+        <div class="pwa-actions">
+            <button class="btn btn-outline-primary btn-sm" id="closeInstall">Plus tard</button>
+            <button class="btn btn-primary btn-sm" id="btnInstall">Installer</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
