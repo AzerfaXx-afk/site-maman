@@ -146,7 +146,8 @@
             background-color: var(--color-bg);
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
         }
         .bio-grid {
             display: grid;
@@ -452,12 +453,11 @@
                     <p>J’attache une grande importance à la formation continue, et participe régulièrement à des ateliers avec les grands noms du domaine pour apprendre les dernières techniques.</p>
                 </div>
             </div>
+            <!-- Inactive Button Section inside bio -->
+            <div class="cta-disabled-section reveal-up" style="margin-top: 35px; width: 100%; text-align: center; padding: 0;">
+                <button class="btn btn-primary btn-large btn-disabled" disabled style="padding: 15px 40px; font-size: 1.05rem;">Et si on parlait de réflexologie ?</button>
+            </div>
         </section>
-
-        <!-- Inactive Button Section -->
-        <div class="cta-disabled-section reveal-up">
-            <button class="btn btn-primary btn-large btn-disabled" disabled>Et si on parlait de réflexologie ?</button>
-        </div>
 
         <!-- Diplomas Carousel -->
         <section class="diplomas-section">
