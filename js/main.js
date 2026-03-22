@@ -124,6 +124,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 5.5 Handle incoming anchors (from other pages)
+    if (window.location.hash) {
+        // Wait briefly for layout and GSAP to instantiate
+        setTimeout(() => {
+            const targetElement = document.querySelector(window.location.hash);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 600);
+    }
+
     // 9. Scroll Dot Observer
     const sections = document.querySelectorAll('.section-scroll');
     const scrollDots = document.querySelectorAll('.scroll-dot');
