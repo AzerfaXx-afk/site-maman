@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Massages | Stéphanie Bouteloup</title>
+    <meta name="description" content="Découvrez les différents massages proposés par Stéphanie Bouteloup, réflexologue Titre RNCP à Grasse. Massages suédois et californiens.">
+    
+    <!-- PWA Requirements -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#C19A6B">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=3">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+
+    <style>
+        .page-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px; 
+        }
+        .page-hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        .page-hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            filter: brightness(0.9);
+        }
+        .page-hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(43, 29, 20, 0.5) 0%, rgba(43, 29, 20, 0.1) 40%, rgba(43, 29, 20, 0) 70%, var(--color-bg) 100%);
+            z-index: 2;
+        }
+        .page-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 50px;
+        }
+        .page-title {
+            font-size: 4.5rem;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-style: italic;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 3.5rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.8rem;
+            }
+            .page-hero {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pull to Refresh Background Container -->
+    <div class="ptr-container">
+        <div class="ptr-logo-wrapper">
+            <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
+        </div>
+    </div>
+
+    <!-- Navigation (OUTSIDE app-wrapper so it stays fixed) -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand-logo">
+            <img src="assets/img/logo.png" alt="Stéphanie Bouteloup Logo" class="nav-brand-img" style="width: 50px; height: 50px;">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="qui-je-suis.html">Qui je suis</a>
+            <a href="massages.html">Massages</a>
+            <div class="nav-socials fade-up">
+                <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+        </div>
+    </nav>
+
+    <!-- Main App Wrapper -->
+    <div id="app-wrapper">
+
+    <div id="page-content">
+
+        <!-- Page Hero (mass1.webp) -->
+        <header class="page-hero">
+            <div class="page-hero-bg">
+                <div class="page-hero-overlay"></div>
+                <img src="assets/img/mass1.webp" alt="Massage" class="page-hero-img">
+            </div>
+            
+            <div class="page-hero-content">
+                <h1 class="page-title fade-up">Massages</h1>
+            </div>
+        </header>
+
+        <!-- Section 1 : Qu’est-ce qu’un Massage ? -->
+        <section class="section" style="padding: 100px 0; background-color: var(--color-bg-light);">
+            <div class="container">
+                <div class="reveal-up text-center" style="max-width:800px; margin: 0 auto;">
+                    <h2 class="section-title">Qu’est-ce qu’un Massage ?</h2>
+                    <div style="text-align: left; font-size: 1.1rem; line-height: 1.8; color: var(--color-text); margin-top: 40px;">
+                        <p style="margin-bottom: 20px;">Les massages soulagent et relâchent les tensions musculaires.</p>
+                        <p style="margin-bottom: 20px;"><strong>Drainants et détoxifiants :</strong> ils améliorent la circulation sanguine et lymphatique.</p>
+                        <p style="margin-bottom: 20px;">Ils accélèrent la régénération tissulaire et stimulent le système immunitaire. Ils rendent au corps toute l’énergie et les défenses dont il a besoin.</p>
+                        <p style="margin-bottom: 20px;">Mieux oxygéné, drainé, irrigué le corps est plus à même de se défendre.</p>
+                        <p style="margin-bottom: 20px;">Le massage permet la diminution de la cytokine, une molécule qui joue un rôle actif dans les inflammations chroniques et du cortisol, hormone associée au stress <span style="font-size: 0.9em; opacity: 0.8; font-style: italic;">(travaux du Cedars-Sinaï Medical Center de Los Angeles- article FFmbe)</span>.</p>
+                        <p style="margin-bottom: 20px;">Les massages modifient l’état du système nerveux.</p>
+                        <p style="margin-bottom: 20px;">Votre état d’esprit change, vous permettant d’être plus réceptif, recentré et ouvert au monde, ainsi corps et esprit sont en harmonie dans un état de parfait équilibre.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 : mass2.webp + text -->
+        <section class="detail-section section">
+            <div class="container detail-container">
+                <div class="detail-text reveal-left">
+                    <div class="service-content-body">
+                        <p>Le massage est un moyen de se reconnecter à soi, de s’autoriser à se laisser porter. Il permet de sentir dans notre corps les espaces oubliés, les zones douloureuses et nos résistances.</p>
+                        <p>Il nous reconnecte à notre ressenti et à l’écoute attentive de notre corps.</p>
+                        <p>Le massage que je propose vous invite à vous régénérer et vous reposer.</p>
+                        <p>Le travail proposé avec le corps comme centre d’intérêt, déjoue les habitudes de construction mentales. Vous n’êtes pas aux commandes, vous apprenez à écouter votre corps.</p>
+                        <p>Chaque massage est une sorte de discussion avec le corps qui va plus loin que la détente et le bien-être.</p>
+                        <p>Une conversation silencieuse, mais active, revigorante, réunifiante, apaisante.</p>
+                        <p>La qualité d’écoute avant et après le massage fait partie de l’expérience.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-right">
+                    <img src="assets/img/mass2.webp" alt="Massage expérience">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3 : Massage Suédois (mass3.webp)  -->
+        <section class="detail-section section detail-reverse">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-right">
+                    <h2 class="section-title" style="margin-bottom: 30px;">Qu’est-ce qu’un Massage Suédois ?</h2>
+                    <div class="service-content-body">
+                        <p>C’est un massage énergique et relaxant.</p>
+                        <p>Il se compose de techniques variées et puissantes (effleurages, frictions, percussions, pétrissages, mobilisations, étirements et vibrations).</p>
+                        <p>Lorsque ces manœuvres sont exécutées dans un ordre spécifique, elles créent des effets similaires à ceux obtenus par la gymnastique.</p>
+                        <p>Il permet de dénouer efficacement les tensions musculaires, il aide à éliminer les toxines, favorise la circulation sanguine et lymphatique, raffermit les muscles, assouplit les articulations. Il renforce la vitalité et entretien le bien-être.</p>
+                        
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary-color); margin-top: 30px; margin-bottom:15px;">Massage suédois au service de la performance sportive :</h3>
+                        <p>Ce massage s’effectue en fonction de la discipline du sportif ou des contraintes physiques liées à un effort. Nous pourrons travailler soit sur la récupération, la détente musculaire et les tensions ou la préparation sportive.</p>
+                        <p>Le but de ce massage est de relâcher et d’échauffer les muscles avant l’effort ou de relâcher les tensions musculaires et les contractures après l’effort. Il accompagne efficacement les sportifs dans la préparation avant l’effort et pour la récupération.</p>
+                        <p>On peut également ajouter des étirements et mobilisations passives qui sont des étirements musculaires prodigués à la personne sans que celle-ci n’intervienne de manière active.</p>
+                        <p>C’est une sorte de stretching passif assisté. Les étirements passifs sur table sont très complémentaires au massage bien être et sportif. Ils sont efficaces en phase de préparation et en phase de récupération.</p>
+
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary-color); margin-top: 30px; margin-bottom:15px;">Ses principaux bienfaits</h3>
+                        <ul style="list-style-type: none; padding-left: 0; margin-left: 0; line-height: 1.6; color: var(--color-text);">
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Optimise et accompagne la performance sportive</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Réduit et soulage les tensions et raideurs musculaires</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Entretien la souplesse musculaire et articulaire</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Augmente le potentiel de performances</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Aide à se sentir mieux dans son corps et son esprit</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Permet de récupérer plus rapidement après un effort</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Améliore le sommeil</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 20px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; font-size: 0.8em; color: var(--primary-color);"></i> Favorise la réduction du stress et de l’anxiété liés à l’effort</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left">
+                    <img src="assets/img/mass3.webp" alt="Massage Suédois">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 : Massage Californien (mass4.webp) -->
+        <section class="detail-section section">
+            <div class="container detail-container">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title" style="margin-bottom: 30px;">Qu’est-ce qu’un Massage Californien ?</h2>
+                    <div class="service-content-body">
+                        <p>C’est un massage relaxant, enveloppant et rassurant, il se caractérise par de longs mouvements intégratifs qui relient les différentes parties du corps (jambes, tronc, bras).</p>
+                        <p>Il comporte également des effleurages, mobilisations, étirements et bercements.</p>
+                        <p>C’est un massage qui engendre une sensation d’unité corporelle et de reconnexion à soi et à l’instant présent. Il est idéal pour les personnes stressées ou souffrant d’anxiété.</p>
+                        <p>Les longs mouvements drainants améliorent la circulation sanguine et lymphatique, ils aident à l’élimination des toxines. Les personnes à la recherche d’une perte de poids seront intéressées par son côté drainant.</p>
+                        <p>La pression est légère à modérée, mais ferme, elle est adaptée à votre ressenti.</p>
+                        <p>Sur la base du massage californien, d’autres techniques peuvent être intégrées (percussions, points de pression, deep tissue…) afin de répondre à vos besoins.</p>
+                        <p>Je m’adapte à votre personnalité et vous propose un massage sur mesure, loin des protocoles formatés.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-right">
+                    <img src="assets/img/mass4.webp" alt="Massage Californien">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-brand">
+                    <a href="index.html#accueil"><img src="assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
+                    <h3>Stéphanie Bouteloup</h3>
+                    <p>Réflexologue titre rncp à Grasse</p>
+                    
+                    <div class="footer-socials">
+                        <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                        <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-group">
+                    <div class="footer-links">
+                        <h4>Certifications & Liens</h4>
+                        <a href="https://www.reflexobreton.fr/" target="_blank" rel="noopener" class="footer-link-text">Reflexo Breton</a>
+                        <a href="https://www.francecompetences.fr/recherche/rncp/23816/" target="_blank" rel="noopener" class="footer-link-text">France Compétences RNCP</a>
+                        <a href="https://www.reflexologues-rncp.com/" target="_blank" rel="noopener" class="footer-link-text">Réflexologues RNCP</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem; display: block; margin-bottom: 5px;">
+                            <a href="tel:+33628388349" class="footer-link-text">06.28.38.83.49.</a>
+                        </span>
+                        <a href="mailto:phanybox@gmail.com" class="footer-link-text" style="text-transform: none;">phanybox@gmail.com</a>
+                    </div>
+                    <div class="footer-cta" style="display: flex; align-items: flex-end; padding-bottom: 10px;">
+                        <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- End Page Content -->
+
+    </div> <!-- End App Wrapper -->
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
