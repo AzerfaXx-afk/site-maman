@@ -144,7 +144,7 @@
         .bio-section {
             padding: 40px 0 30px;
             background-color: var(--color-bg);
-            min-height: 100vh;
+            min-height: calc(100vh - 100px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -538,6 +538,21 @@
     </div> <!-- End Page Content -->
 
     </div> <!-- End App Wrapper -->
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        <div class="pwa-content">
+            <img src="assets/img/logo.png" alt="S. Bouteloup">
+            <div class="pwa-text">
+                <strong>Prendre RDV plus vite ?</strong>
+                <p>Installez l'App : réservez vos séances quand vous voulez, en 1 seul clic.</p>
+            </div>
+        </div>
+        <div class="pwa-actions">
+            <button class="btn btn-outline-primary btn-sm" id="closeInstall">Plus tard</button>
+            <button class="btn btn-primary btn-sm" id="btnInstall">Installer</button>
+        </div>
+    </div>
 
     <!-- Lightbox Element (OUTSIDE app-wrapper to escape stacking context) -->
     <div class="lightbox" id="diplomaLightbox">

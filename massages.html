@@ -134,7 +134,7 @@
         </header>
 
         <!-- Sections 1 & 2 combinées : Qu’est-ce qu’un Massage ? -->
-        <section class="section" style="padding: 40px 0; background-color: var(--color-bg-light); min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" id="page-content-start">
+        <section class="section" style="padding: 40px 0; background-color: var(--color-bg-light); min-height: calc(100vh - 100px); display: flex; flex-direction: column; justify-content: center;" id="page-content-start">
             <div class="container">
                 <h2 class="section-title text-center" style="margin-bottom: 20px;">Qu’est-ce qu’un Massage ?</h2>
                 <div style="font-size: 0.85rem; line-height: 1.6; color: var(--color-text); margin-bottom: 30px;">
@@ -170,7 +170,7 @@
         </section>
 
         <!-- Section 3 : Massage Suédois (mass3.webp)  -->
-        <section id="suedois" class="detail-section section detail-reverse" style="padding: 40px 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+        <section id="suedois" class="detail-section section detail-reverse" style="padding: 40px 0; min-height: calc(100vh - 100px); display: flex; flex-direction: column; justify-content: center;">
             <div class="container">
                 <h2 class="section-title text-center" style="margin-bottom: 20px;">Qu’est-ce qu’un Massage Suédois ?</h2>
                 <div class="detail-container reverse" style="gap: 30px;">
@@ -204,7 +204,7 @@
         </section>
 
         <!-- Section 4 : Massage Californien (mass4.webp) -->
-        <section id="californien" class="detail-section section">
+        <section id="californien" class="detail-section section" style="padding: 40px 0; min-height: calc(100vh - 100px); display: flex; flex-direction: column; justify-content: center;">
             <div class="container detail-container">
                 <div class="detail-text reveal-left">
                     <h2 class="section-title" style="margin-bottom: 30px;">Qu’est-ce qu’un Massage Californien ?</h2>
@@ -269,6 +269,21 @@
     </div> <!-- End Page Content -->
 
     </div> <!-- End App Wrapper -->
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        <div class="pwa-content">
+            <img src="assets/img/logo.png" alt="S. Bouteloup">
+            <div class="pwa-text">
+                <strong>Prendre RDV plus vite ?</strong>
+                <p>Installez l'App : réservez vos séances quand vous voulez, en 1 seul clic.</p>
+            </div>
+        </div>
+        <div class="pwa-actions">
+            <button class="btn btn-outline-primary btn-sm" id="closeInstall">Plus tard</button>
+            <button class="btn btn-primary btn-sm" id="btnInstall">Installer</button>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

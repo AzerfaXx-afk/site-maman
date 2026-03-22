@@ -29,7 +29,7 @@
    GLOBAL STYLES
    ========================================================================= */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; touch-action: pan-x pan-y; }
+html { scroll-behavior: smooth; touch-action: pan-x pan-y; scroll-padding-top: 100px; }
 body {
     background-color: #2b1d14; /* Dark wood fallback */
     background-image: url('../assets/img/wood-texture-logo.png');
