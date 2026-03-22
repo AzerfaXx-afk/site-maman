@@ -899,3 +899,45 @@ body.no-scroll { overflow: hidden; }
 .pwa-actions { display: flex; justify-content: flex-end; gap: 10px; }
 .pwa-actions .btn-sm { padding: 8px 16px; font-size: 0.8rem; border-radius: 20px; text-transform: none; letter-spacing: 0; }
 
+/* ========================================================================= 
+   CHEVRON DOWN ARROW
+   ========================================================================= */
+.chevron-down-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    animation: bounce-regular 2s infinite;
+}
+.chevron-down-arrow:hover {
+    color: var(--primary-dark);
+}
+.chevron-hero {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    z-index: 10;
+    margin: 0;
+    animation: bounce 2s infinite;
+}
+.chevron-hero:hover {
+    color: var(--primary-color);
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+    40% { transform: translateY(-15px) translateX(-50%); }
+    60% { transform: translateY(-7px) translateX(-50%); }
+}
+@keyframes bounce-regular {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+    60% { transform: translateY(-7px); }
+}
