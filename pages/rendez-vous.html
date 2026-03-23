@@ -86,7 +86,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: start;
+            align-items: stretch;
         }
 
         /* Left: Info Card */
@@ -95,6 +95,8 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
         }
         .contact-info-card img {
             width: 100%;
@@ -103,6 +105,10 @@
         }
         .contact-info-body {
             padding: 35px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .contact-info-body h3 {
             font-family: var(--font-heading);
@@ -161,6 +167,9 @@
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .contact-form-wrapper h3 {
             font-family: var(--font-heading);
@@ -255,7 +264,7 @@
         }
         .map-section iframe {
             width: 100%;
-            height: 450px;
+            height: 600px;
             border: 0;
             display: block;
         }
@@ -274,7 +283,7 @@
             .contact-form-wrapper { padding: 25px; }
             .form-row { grid-template-columns: 1fr; }
             .dual-images img { height: 55vw; }
-            .map-section iframe { height: 300px; }
+            .map-section iframe { height: 400px; }
         }
     </style>
 </head>
@@ -304,7 +313,7 @@
             <a href="tarifs.html">Tarifs</a>
             <a href="bons-cadeaux.html">Bons Cadeaux</a>
             <a href="galerie.html">Galerie</a>
-            <a href="rendez-vous.html" class="active">Rendez-vous</a>
+            <a href="rendez-vous.html" class="active">Prendre RDV</a>
             <div class="nav-socials fade-up">
                 <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
                 <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
@@ -350,10 +359,10 @@
                                 <i class="fa-solid fa-phone"></i>
                                 <span>06 28 38 83 49</span>
                             </a>
-                            <div class="contact-detail">
+                            <a href="#map" class="contact-detail" style="text-decoration: none;">
                                 <i class="fa-solid fa-location-dot"></i>
                                 <span>37 Avenue de Boutiny<br>06530 Peymeinade</span>
-                            </div>
+                            </a>
 
                             <div class="contact-btn-group">
                                 <a href="qui-je-suis.html" class="btn btn-outline-primary" style="font-size: 0.85rem; padding: 10px 20px;">Qui je suis</a>
@@ -419,7 +428,7 @@
         </div>
 
         <!-- Google Maps -->
-        <section class="map-section">
+        <section class="map-section" id="map">
             <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.0!2d6.8744!3d43.6406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cc2b8a1a1a1a1a%3A0x1a1a1a1a1a1a1a1a!2s37%20Av.%20de%20Boutiny%2C%2006530%20Peymeinade!5e0!3m2!1sfr!2sfr!4v1711200000000!5m2!1sfr!2sfr" 
                 allowfullscreen="" 

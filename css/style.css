@@ -200,8 +200,14 @@ img { max-width: 100%; height: auto; display: block; }
     transition: var(--transition-smooth);
 }
 
+
 .nav-links > a:not(.btn):hover::after { width: 100%; }
 .nav-links > a:not(.btn):hover { color: var(--primary-color); }
+
+/* Active page indicator - underline stays */
+.nav-links > a.active:not(.btn) { color: var(--primary-color); }
+.nav-links > a.active:not(.btn)::after { width: 100%; background: var(--primary-color); }
+.navbar:not(.scrolled) .nav-links > a.active:not(.btn) { color: var(--primary-color); }
 
 .nav-socials {
     display: flex;
