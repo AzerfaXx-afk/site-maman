@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Galerie | Stéphanie Bouteloup</title>
+    <meta name="description" content="Découvrez notre galerie de photos du cabinet de Stéphanie Bouteloup, réflexologue et masseuse à Grasse.">
+    
+    <!-- PWA Requirements -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#C19A6B">
+    <link rel="apple-touch-icon" href="../assets/img/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css?v=3">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/img/logo.png">
+
+    <style>
+        .page-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px; 
+        }
+        .page-hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        .page-hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            filter: brightness(0.8);
+        }
+        .page-hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(43, 29, 20, 0.5) 0%, rgba(43, 29, 20, 0.2) 40%, rgba(43, 29, 20, 0.1) 70%, var(--color-bg) 100%);
+            z-index: 2;
+        }
+        .page-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 50px;
+        }
+        .page-title {
+            font-size: 4.5rem;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-style: italic;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 5px;
+        }
+        .page-subtitle {
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            font-family: var(--font-heading);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            margin-top: 0;
+        }
+
+        /* LIGHTBOX STYLES */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            touch-action: none;
+        }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+        .lightbox-zoom-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            touch-action: none; 
+            cursor: grab;
+        }
+        .lightbox-zoom-container.zoomed {
+            cursor: grabbing;
+        }
+        .lightbox-zoom-container.zoomed:active {
+            cursor: grabbing;
+        }
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-origin: center center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+        .lightbox-zoom-container.zoomed .lightbox-content {
+            transition: none;
+        }
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            z-index: 10001;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10002;
+            transition: transform 0.3s ease;
+        }
+        .lightbox-close:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10001;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox-nav:hover {
+            background: rgba(0,0,0,0.6);
+            color: var(--primary-color);
+        }
+        .lightbox-prev { left: 2%; }
+        .lightbox-next { right: 2%; }
+
+        @media (max-width: 992px) {
+            .page-title { font-size: 3.5rem; }
+            .page-subtitle { font-size: 1.5rem; }
+            
+            .lightbox-nav { font-size: 1.5rem; padding: 10px; width: 44px; height: 44px; }
+            .lightbox-prev { left: 5px; }
+            .lightbox-next { right: 5px; }
+            .lightbox-close { top: 10px; right: 15px; font-size: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.8rem; }
+            .page-subtitle { font-size: 1.2rem; }
+            .page-hero { height: 50vh; }
+            
+            .lightbox-close { top: 8px; right: 12px; font-size: 1.8rem; }
+            .lightbox-nav { font-size: 1.2rem; width: 36px; height: 36px; padding: 8px; }
+            .lightbox-prev { left: 2px; }
+            .lightbox-next { right: 2px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pull to Refresh Background Container -->
+    <div class="ptr-container">
+        <div class="ptr-logo-wrapper">
+            <img src="../assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="../index.html" class="nav-brand-logo">
+            <img src="../assets/img/logo.png" alt="Stéphanie Bouteloup Logo" class="nav-brand-img" style="width: 50px; height: 50px;">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="qui-je-suis.html">Qui je suis</a>
+            <a href="massages.html">Massages</a>
+            <a href="reflexologie.html">Réflexologie</a>
+            <a href="kobido.html">Kobido</a>
+            <a href="tarifs.html">Tarifs</a>
+            <a href="bons-cadeaux.html">Bons Cadeaux</a>
+            <a href="galerie.html" class="active">Galerie</a>
+            <div class="nav-socials fade-up">
+                <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+        </div>
+    </nav>
+
+    <!-- Main App Wrapper -->
+    <div id="app-wrapper">
+    <div id="page-content">
+
+        <!-- Page Hero (g1.webp) -->
+        <header class="page-hero">
+            <div class="page-hero-bg">
+                <div class="page-hero-overlay"></div>
+                <img src="../assets/img/g1.webp" alt="Galerie" class="page-hero-img">
+            </div>
+            
+            <div class="page-hero-content">
+                <h1 class="page-title fade-up">Galerie Photos</h1>
+                <p class="page-subtitle fade-up delay-1">Un aperçu de notre univers</p>
+            </div>
+            <a href="#gallery" class="chevron-down-arrow chevron-hero"><i class="fa-solid fa-chevron-down"></i></a>
+        </header>
+
+        <!-- Gallery Grid Section -->
+        <section id="gallery" class="section reveal-group" style="padding: 80px 0; background-color: var(--color-bg-light); min-height: 80vh;">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <h2 class="section-title reveal-up">Une ambiance propice à la détente</h2>
+                    <p class="section-subtitle reveal-up delay-1" style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Plongez dans l'atmosphère apaisante de notre cabinet et découvrez les espaces dédiés à votre bien-être.</p>
+                </div>
+                
+                <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- JS will inject images here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html#accueil"><img src="../assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
+                    <h3>Stéphanie Bouteloup</h3>
+                    <p>Réflexologue titre rncp à Grasse</p>
+                    
+                    <div class="footer-socials">
+                        <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                        <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-group">
+                    <div class="footer-links">
+                        <h4>Certifications & Liens</h4>
+                        <a href="https://www.reflexobreton.fr/" target="_blank" rel="noopener" class="footer-link-text">Reflexo Breton</a>
+                        <a href="https://www.francecompetences.fr/recherche/rncp/23816/" target="_blank" rel="noopener" class="footer-link-text">France Compétences RNCP</a>
+                        <a href="https://www.reflexologues-rncp.com/" target="_blank" rel="noopener" class="footer-link-text">Réflexologues RNCP</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem; display: block; margin-bottom: 5px;">
+                            <a href="tel:+33628388349" class="footer-link-text">06.28.38.83.49.</a>
+                        </span>
+                        <a href="mailto:phanybox@gmail.com" class="footer-link-text" style="text-transform: none;">phanybox@gmail.com</a>
+                    </div>
+                    <div class="footer-cta" style="display: flex; align-items: flex-end; padding-bottom: 10px;">
+                        <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 30px; padding-top: 20px; padding-bottom: 20px; color: var(--color-text-muted); font-size: 0.9rem; font-style: italic;">
+                <p style="margin-bottom: 5px;">Site créé par Adam Bouteloup <a href="https://www.instagram.com/adam_btp" target="_blank" rel="noopener" style="color: var(--primary-color); margin-left: 5px; font-size: 1.2rem; vertical-align: middle;"><i class="fa-brands fa-instagram"></i></a></p>
+                <p style="font-size: 0.8rem; margin: 0; opacity: 0.8;">
+                    Contactez moi pour avoir un site pro : <a href="mailto:adambox06@gmail.com" style="color: var(--primary-color); text-decoration: none;"><i class="fa-regular fa-envelope" style="margin-right: 4px;"></i>adambox06@gmail.com</a>
+                </p>
+            </div>
+        </footer>
+
+    </div> <!-- End Page Content -->
+    </div> <!-- End App Wrapper -->
+
+    <!-- Lightbox Element -->
+    <div class="lightbox" id="galleryLightbox">
+        <i class="fa-solid fa-xmark lightbox-close" id="closeLightbox"></i>
+        <i class="fa-solid fa-chevron-left lightbox-nav lightbox-prev" id="prevLightbox"></i>
+        <i class="fa-solid fa-chevron-right lightbox-nav lightbox-next" id="nextLightbox"></i>
+        <div class="lightbox-zoom-container" id="zoomContainer">
+            <img src="" alt="Photo" class="lightbox-content" id="lightboxImg">
+        </div>
+        <span class="lightbox-counter" id="lightboxCounter">1 / 24</span>
+    </div>
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        <div class="pwa-content">
+            <img src="../assets/img/logo.png" alt="S. Bouteloup">
+            <div class="pwa-text">
+                <strong>Prendre RDV plus vite ?</strong>
+                <p>Installez l'App : réservez vos séances quand vous voulez, en 1 seul clic.</p>
+            </div>
+        </div>
+        <div class="pwa-actions">
+            <button class="btn btn-outline-primary btn-sm" id="closeInstall">Plus tard</button>
+            <button class="btn btn-primary btn-sm" id="btnInstall">Installer</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Populate grid
+            const grid = document.querySelector('.gallery-grid');
+            const totalImages = 24;
+            let html = '';
+            
+            for(let i = 1; i <= totalImages; i++) {
+                html += `
+                    <div class="gallery-item reveal-scale" style="aspect-ratio: 1; border-radius: 8px; overflow: hidden; position: relative; cursor: zoom-in; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: #eee;">
+                        <img src="../assets/img/g${i}.webp" alt="Galerie ${i}" class="gallery-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; pointer-events: none;" data-index="${i-1}">
+                        <div class="gallery-overlay" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(43,29,20,0.5) 0%, rgba(43,29,20,0) 50%); opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: 15px; right: 15px; color: #fff; opacity: 0; transition: opacity 0.3s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));" class="zoom-icon">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+
+            // Simple visual interaction
+            const items = document.querySelectorAll('.gallery-item');
+            const imageSources = Array.from(items).map((_, idx) => `assets/img/g${idx+1}.webp`);
+
+            items.forEach((item, idx) => {
+                item.addEventListener('mouseenter', () => {
+                    item.querySelector('.gallery-img').style.transform = 'scale(1.08)';
+                    item.querySelector('.gallery-overlay').style.opacity = '1';
+                    item.querySelector('.zoom-icon').style.opacity = '1';
+                });
+                item.addEventListener('mouseleave', () => {
+                    item.querySelector('.gallery-img').style.transform = 'scale(1)';
+                    item.querySelector('.gallery-overlay').style.opacity = '0';
+                    item.querySelector('.zoom-icon').style.opacity = '0';
+                });
+                item.addEventListener('click', () => {
+                    openLightbox(idx);
+                });
+            });
+
+            // Re-trigger scroll animations after DOM population
+            ScrollTrigger.refresh();
+            
+            const newReveals = gsap.utils.toArray('.gallery-item.reveal-scale');
+            gsap.fromTo(newReveals,
+                { scale: 0.9, autoAlpha: 0 },
+                { scale: 1, autoAlpha: 1, duration: 0.8, stagger: 0.05, ease: "back.out(1.2)",
+                    scrollTrigger: { trigger: grid, start: "top 85%" }
+                }
+            );
+
+            // Lightbox Logic
+            const lightbox = document.getElementById('galleryLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeLightboxBtn = document.getElementById('closeLightbox');
+            const prevLightboxBtn = document.getElementById('prevLightbox');
+            const nextLightboxBtn = document.getElementById('nextLightbox');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const zoomContainer = document.getElementById('zoomContainer');
+
+            let currentIndex = 0;
+            let currentScale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            const updateImage = () => {
+                lightboxImg.src = imageSources[currentIndex];
+                lightboxCounter.textContent = (currentIndex + 1) + ' / ' + totalImages;
+                resetZoom();
+            };
+
+            const openLightbox = (index) => {
+                currentIndex = index;
+                updateImage();
+                gsap.fromTo(lightboxImg, {opacity: 0.3, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out'});
+                lightbox.classList.add('active');
+                document.body.classList.add('no-scroll');
+            };
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+                setTimeout(resetZoom, 400); 
+            };
+
+            const nextImage = (e) => {
+                if(e) e.stopPropagation();
+                currentIndex = (currentIndex + 1) % totalImages;
+                updateImage();
+            };
+
+            const prevImage = (e) => {
+                if(e) e.stopPropagation();
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                updateImage();
+            };
+
+            closeLightboxBtn.addEventListener('click', closeLightbox);
+            prevLightboxBtn.addEventListener('click', prevImage);
+            nextLightboxBtn.addEventListener('click', nextImage);
+
+            // Navigation via keyboard
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            });
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === zoomContainer || e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Pan and Zoom
+            const resetZoom = () => {
+                currentScale = 1;
+                translateX = 0;
+                translateY = 0;
+                lightboxImg.style.transform = 'translate(0px, 0px) scale(1)';
+                zoomContainer.classList.remove('zoomed');
+            };
+
+            const setTransform = () => {
+                lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+            };
+
+            zoomContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const zoomFactor = 0.1;
+                if (e.deltaY < 0) {
+                    currentScale = Math.min(currentScale + zoomFactor, 4);
+                } else {
+                    currentScale = Math.max(currentScale - zoomFactor, 1);
+                }
+                
+                if (currentScale === 1) resetZoom();
+                else {
+                    zoomContainer.classList.add('zoomed');
+                    setTransform();
+                }
+            }, { passive: false });
+
+            // Drag to pan
+            zoomContainer.addEventListener('mousedown', (e) => {
+                if (currentScale > 1) {
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                }
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                setTransform();
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            // Touch gestures for mobile panning
+            zoomContainer.addEventListener('touchstart', (e) => {
+                if (currentScale > 1 && e.touches.length === 1) {
+                    isDragging = true;
+                    startX = e.touches[0].clientX - translateX;
+                    startY = e.touches[0].clientY - translateY;
+                }
+            }, { passive: true });
+
+            zoomContainer.addEventListener('touchmove', (e) => {
+                if (!isDragging || e.touches.length !== 1) return;
+                e.preventDefault(); // Prevent default only during dragging
+                translateX = e.touches[0].clientX - startX;
+                translateY = e.touches[0].clientY - startY;
+                setTransform();
+            }, { passive: false });
+
+            zoomContainer.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+        });
+    </script>
+</body>
+</html>

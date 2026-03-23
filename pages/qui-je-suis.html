@@ -7,9 +7,9 @@
     <meta name="description" content="Découvrez le parcours de Stéphanie Bouteloup, réflexologue Titre RNCP à Grasse.">
     
     <!-- PWA Requirements -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#C19A6B">
-    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" href="../assets/img/logo.png">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css?v=3">
+    <link rel="stylesheet" href="../css/style.css?v=3">
     
     <style>
         /* INLINE STYLES TO BYPASS CACHE FOR DIPLOMAS */
@@ -375,20 +375,20 @@
     </style>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" href="../assets/img/logo.png">
 </head>
 <body>
     <!-- Pull to Refresh Background Container -->
     <div class="ptr-container">
         <div class="ptr-logo-wrapper">
-            <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
+            <img src="../assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
         </div>
     </div>
 
     <!-- Navigation (OUTSIDE app-wrapper so it stays fixed) -->
     <nav class="navbar">
-        <a href="index.html" class="nav-brand-logo">
-            <img src="assets/img/logo.png" alt="Stéphanie Bouteloup Logo" class="nav-brand-img" style="width: 50px; height: 50px;">
+        <a href="../index.html" class="nav-brand-logo">
+            <img src="../assets/img/logo.png" alt="Stéphanie Bouteloup Logo" class="nav-brand-img" style="width: 50px; height: 50px;">
         </a>
         <div class="hamburger">
             <span></span>
@@ -402,6 +402,7 @@
             <a href="kobido.html">Kobido</a>
             <a href="tarifs.html">Tarifs</a>
             <a href="bons-cadeaux.html">Bons Cadeaux</a>
+            <a href="galerie.html">Galerie</a>
             <div class="nav-socials fade-up">
                 <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
                 <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
@@ -422,7 +423,7 @@
             <div class="page-hero-bg">
                 <div class="page-hero-overlay"></div>
                 <!-- We use img1.webp as requested -->
-                <img src="assets/img/img1.webp" alt="Ambiance douce réflexologie" class="page-hero-img">
+                <img src="../assets/img/img1.webp" alt="Ambiance douce réflexologie" class="page-hero-img">
             </div>
             
             <div class="page-hero-content">
@@ -435,7 +436,7 @@
         <section class="bio-section container reveal-group" id="page-content-start">
             <div class="bio-grid">
                 <div class="bio-img-wrapper reveal-left">
-                    <img src="assets/img/img2.webp" alt="Stéphanie Bouteloup">
+                    <img src="../assets/img/img2.webp" alt="Stéphanie Bouteloup">
                 </div>
                 <div class="bio-text reveal-right">
                     <span class="bio-greeting">Bonjour,</span>
@@ -448,7 +449,7 @@
             </div>
             <!-- Inactive Button Section inside bio -->
             <div class="cta-disabled-section reveal-up" style="margin-top: 25px; width: 100%; text-align: center; padding: 0;">
-                <button class="btn btn-primary btn-large btn-disabled" disabled style="padding: 12px 35px; font-size: 1rem;">Et si on parlait de réflexologie ?</button>
+                <a href="reflexologie.html" class="btn btn-primary btn-large" style="padding: 12px 35px; font-size: 1rem; color: #fff; text-decoration: none; display: inline-block;">Et si on parlait de réflexologie ?</a>
             </div>
         </section>
 
@@ -464,25 +465,25 @@
                 <!-- Grid -->
                 <!-- Removed reveal-scale completely -->
                 <div class="diplomas-grid">
-                    <div class="diploma-item" data-id="1" data-src="assets/img/dip1.webp"><img src="assets/img/dip1.webp" alt="Diplôme 1" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="2" data-src="assets/img/dip2.webp"><img src="assets/img/dip2.webp" alt="Diplôme 2" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="3" data-src="assets/img/dip3.webp"><img src="assets/img/dip3.webp" alt="Diplôme 3" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="4" data-src="assets/img/dip4.webp"><img src="assets/img/dip4.webp" alt="Diplôme 4" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="5" data-src="assets/img/dip5.webp"><img src="assets/img/dip5.webp" alt="Diplôme 5" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="6" data-src="assets/img/dip6.webp"><img src="assets/img/dip6.webp" alt="Diplôme 6" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="7" data-src="assets/img/dip7.webp"><img src="assets/img/dip7.webp" alt="Diplôme 7" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="8" data-src="assets/img/dip8.webp"><img src="assets/img/dip8.webp" alt="Diplôme 8" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="9" data-src="assets/img/dip9.webp"><img src="assets/img/dip9.webp" alt="Diplôme 9" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="10" data-src="assets/img/dip10.webp"><img src="assets/img/dip10.webp" alt="Diplôme 10" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="11" data-src="assets/img/dip11.webp"><img src="assets/img/dip11.webp" alt="Diplôme 11" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="12" data-src="assets/img/dip12.webp"><img src="assets/img/dip12.webp" alt="Diplôme 12" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="13" data-src="assets/img/dip13.webp"><img src="assets/img/dip13.webp" alt="Diplôme 13" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="14" data-src="assets/img/dip14.webp"><img src="assets/img/dip14.webp" alt="Diplôme 14" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="15" data-src="assets/img/dip15.webp"><img src="assets/img/dip15.webp" alt="Diplôme 15" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="16" data-src="assets/img/dip16.webp"><img src="assets/img/dip16.webp" alt="Diplôme 16" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="17" data-src="assets/img/dip17.webp"><img src="assets/img/dip17.webp" alt="Diplôme 17" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="18" data-src="assets/img/dip18.webp"><img src="assets/img/dip18.webp" alt="Diplôme 18" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="19" data-src="assets/img/dip19.webp"><img src="assets/img/dip19.webp" alt="Diplôme 19" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="1" data-src="../assets/img/dip1.webp"><img src="../assets/img/dip1.webp" alt="Diplôme 1" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="2" data-src="../assets/img/dip2.webp"><img src="../assets/img/dip2.webp" alt="Diplôme 2" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="3" data-src="../assets/img/dip3.webp"><img src="../assets/img/dip3.webp" alt="Diplôme 3" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="4" data-src="../assets/img/dip4.webp"><img src="../assets/img/dip4.webp" alt="Diplôme 4" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="5" data-src="../assets/img/dip5.webp"><img src="../assets/img/dip5.webp" alt="Diplôme 5" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="6" data-src="../assets/img/dip6.webp"><img src="../assets/img/dip6.webp" alt="Diplôme 6" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="7" data-src="../assets/img/dip7.webp"><img src="../assets/img/dip7.webp" alt="Diplôme 7" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="8" data-src="../assets/img/dip8.webp"><img src="../assets/img/dip8.webp" alt="Diplôme 8" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="9" data-src="../assets/img/dip9.webp"><img src="../assets/img/dip9.webp" alt="Diplôme 9" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="10" data-src="../assets/img/dip10.webp"><img src="../assets/img/dip10.webp" alt="Diplôme 10" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="11" data-src="../assets/img/dip11.webp"><img src="../assets/img/dip11.webp" alt="Diplôme 11" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="12" data-src="../assets/img/dip12.webp"><img src="../assets/img/dip12.webp" alt="Diplôme 12" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="13" data-src="../assets/img/dip13.webp"><img src="../assets/img/dip13.webp" alt="Diplôme 13" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="14" data-src="../assets/img/dip14.webp"><img src="../assets/img/dip14.webp" alt="Diplôme 14" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="15" data-src="../assets/img/dip15.webp"><img src="../assets/img/dip15.webp" alt="Diplôme 15" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="16" data-src="../assets/img/dip16.webp"><img src="../assets/img/dip16.webp" alt="Diplôme 16" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="17" data-src="../assets/img/dip17.webp"><img src="../assets/img/dip17.webp" alt="Diplôme 17" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="18" data-src="../assets/img/dip18.webp"><img src="../assets/img/dip18.webp" alt="Diplôme 18" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                    <div class="diploma-item" data-id="19" data-src="../assets/img/dip19.webp"><img src="../assets/img/dip19.webp" alt="Diplôme 19" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
                 </div>
             </div>
         </section>
@@ -491,7 +492,7 @@
         <footer class="footer">
             <div class="container footer-content">
                 <div class="footer-brand">
-                    <a href="index.html#accueil"><img src="assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
+                    <a href="../index.html#accueil"><img src="../assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
                     <h3>Stéphanie Bouteloup</h3>
                     <p>Réflexologue titre rncp à Grasse</p>
                     
@@ -522,9 +523,11 @@
                     </div>
                 </div>
             </div>
-            <div class="container" style="text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 30px; padding-top: 20px; padding-bottom: 10px; color: var(--color-text-muted); font-size: 0.9rem; font-style: italic;">
-                Site créé par Adam Bouteloup 
-                <a href="https://www.instagram.com/adam_btp" target="_blank" rel="noopener" style="color: var(--primary-color); margin-left: 8px; font-size: 1.2rem; vertical-align: middle;"><i class="fa-brands fa-instagram"></i></a>
+            <div class="container" style="text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 30px; padding-top: 20px; padding-bottom: 20px; color: var(--color-text-muted); font-size: 0.9rem; font-style: italic;">
+                <p style="margin-bottom: 5px;">Site créé par Adam Bouteloup <a href="https://www.instagram.com/adam_btp" target="_blank" rel="noopener" style="color: var(--primary-color); margin-left: 5px; font-size: 1.2rem; vertical-align: middle;"><i class="fa-brands fa-instagram"></i></a></p>
+                <p style="font-size: 0.8rem; margin: 0; opacity: 0.8;">
+                    Contactez moi pour avoir un site pro : <a href="mailto:adambox06@gmail.com" style="color: var(--primary-color); text-decoration: none;"><i class="fa-regular fa-envelope" style="margin-right: 4px;"></i>adambox06@gmail.com</a>
+                </p>
             </div>
         </footer>
 
@@ -535,7 +538,7 @@
     <!-- PWA Install Prompt -->
     <div class="pwa-install-prompt" id="installPrompt">
         <div class="pwa-content">
-            <img src="assets/img/logo.png" alt="S. Bouteloup">
+            <img src="../assets/img/logo.png" alt="S. Bouteloup">
             <div class="pwa-text">
                 <strong>Prendre RDV plus vite ?</strong>
                 <p>Installez l'App : réservez vos séances quand vous voulez, en 1 seul clic.</p>
@@ -562,7 +565,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="js/main.js"></script> <!-- Reusing main.js for global reveals/hamburger -->
+    <script src="../js/main.js"></script> <!-- Reusing main.js for global reveals/hamburger -->
     
     <!-- About Page Scripts -->
     <script>
