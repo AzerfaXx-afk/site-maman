@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetFile = path.join(__dirname, 'pages', 'galerie.html');
+
+let gridHTML = '';
+for (let i = 1; i <= 24; i++) {
+    gridHTML += `                    <div class="diploma-item" data-id="${i}" data-src="../assets/img/g${i}.webp"><img src="../assets/img/g${i}.webp" alt="Galerie ${i}" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>\n`;
+}
+
+const htmlContent = `<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -350,31 +360,7 @@
                     <p class="section-subtitle reveal-up delay-1" style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Plongez dans l'atmosphère apaisante de notre cabinet et découvrez les espaces dédiés à votre bien-être.</p>
                 </div>
                 
-                    <div class="diploma-item" data-id="1" data-src="../assets/img/g1.webp"><img src="../assets/img/g1.webp" alt="Galerie 1" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="2" data-src="../assets/img/g2.webp"><img src="../assets/img/g2.webp" alt="Galerie 2" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="3" data-src="../assets/img/g3.webp"><img src="../assets/img/g3.webp" alt="Galerie 3" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="4" data-src="../assets/img/g4.webp"><img src="../assets/img/g4.webp" alt="Galerie 4" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="5" data-src="../assets/img/g5.webp"><img src="../assets/img/g5.webp" alt="Galerie 5" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="6" data-src="../assets/img/g6.webp"><img src="../assets/img/g6.webp" alt="Galerie 6" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="7" data-src="../assets/img/g7.webp"><img src="../assets/img/g7.webp" alt="Galerie 7" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="8" data-src="../assets/img/g8.webp"><img src="../assets/img/g8.webp" alt="Galerie 8" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="9" data-src="../assets/img/g9.webp"><img src="../assets/img/g9.webp" alt="Galerie 9" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="10" data-src="../assets/img/g10.webp"><img src="../assets/img/g10.webp" alt="Galerie 10" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="11" data-src="../assets/img/g11.webp"><img src="../assets/img/g11.webp" alt="Galerie 11" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="12" data-src="../assets/img/g12.webp"><img src="../assets/img/g12.webp" alt="Galerie 12" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="13" data-src="../assets/img/g13.webp"><img src="../assets/img/g13.webp" alt="Galerie 13" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="14" data-src="../assets/img/g14.webp"><img src="../assets/img/g14.webp" alt="Galerie 14" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="15" data-src="../assets/img/g15.webp"><img src="../assets/img/g15.webp" alt="Galerie 15" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="16" data-src="../assets/img/g16.webp"><img src="../assets/img/g16.webp" alt="Galerie 16" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="17" data-src="../assets/img/g17.webp"><img src="../assets/img/g17.webp" alt="Galerie 17" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="18" data-src="../assets/img/g18.webp"><img src="../assets/img/g18.webp" alt="Galerie 18" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="19" data-src="../assets/img/g19.webp"><img src="../assets/img/g19.webp" alt="Galerie 19" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="20" data-src="../assets/img/g20.webp"><img src="../assets/img/g20.webp" alt="Galerie 20" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="21" data-src="../assets/img/g21.webp"><img src="../assets/img/g21.webp" alt="Galerie 21" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="22" data-src="../assets/img/g22.webp"><img src="../assets/img/g22.webp" alt="Galerie 22" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="23" data-src="../assets/img/g23.webp"><img src="../assets/img/g23.webp" alt="Galerie 23" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="24" data-src="../assets/img/g24.webp"><img src="../assets/img/g24.webp" alt="Galerie 24" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-
+${gridHTML}
 
             </div>
         </section>
@@ -514,7 +500,7 @@
 
             zoomContainer.addEventListener('touchend', (e) => {
                 if(e.touches.length < 2) {
-                    const match = lightboxImg.style.transform.match(/scale\(([\d.]+)\)/);
+                    const match = lightboxImg.style.transform.match(/scale\\(([\\d.]+)\\)/);
                     if(match) {
                         const finalScale = parseFloat(match[1]);
                         if(finalScale <= 1.2) {
@@ -648,4 +634,7 @@
         });
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(targetFile, htmlContent, 'utf8');
+console.log('Galerie rebuilt flawlessly.');
