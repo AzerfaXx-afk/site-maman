@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kobido | Stéphanie Bouteloup</title>
+    <meta name="description" content="Découvrez le massage Kobido, véritable lifting naturel japonais, proposé par Stéphanie Bouteloup à Grasse. Anti-âge, relaxation et bien-être.">
+    
+    <!-- PWA Requirements -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#C19A6B">
+    <link rel="apple-touch-icon" href="assets/img/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=3">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+
+    <style>
+        .page-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px; 
+        }
+        .page-hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        .page-hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            filter: brightness(0.9);
+        }
+        .page-hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(43, 29, 20, 0.5) 0%, rgba(43, 29, 20, 0.2) 40%, rgba(43, 29, 20, 0.1) 70%, var(--color-bg) 100%);
+            z-index: 2;
+        }
+        .page-hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 50px;
+        }
+        .page-title {
+            font-size: 4.5rem;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-style: italic;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 5px;
+        }
+        .page-subtitle {
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            font-family: var(--font-heading);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            margin-top: 0;
+        }
+        
+        .parallax-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .parallax-bg {
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            object-fit: cover;
+            z-index: 1;
+            will-change: transform;
+        }
+        
+        @media (max-width: 992px) {
+            .page-title { font-size: 3.5rem; }
+            .page-subtitle { font-size: 1.5rem; }
+        }
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.8rem; }
+            .page-subtitle { font-size: 1.2rem; }
+            .page-hero { height: 50vh; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pull to Refresh Background Container -->
+    <div class="ptr-container">
+        <div class="ptr-logo-wrapper">
+            <img src="assets/img/logo.png" alt="RefreshLogo" class="ptr-logo">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand-logo">
+            <img src="assets/img/logo.png" alt="Stéphanie Bouteloup Logo" class="nav-brand-img" style="width: 50px; height: 50px;">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="qui-je-suis.html">Qui je suis</a>
+            <a href="massages.html">Massages</a>
+            <a href="reflexologie.html">Réflexologie</a>
+            <a href="kobido.html" class="active">Kobido</a>
+            <a href="tarifs.html">Tarifs</a>
+            <div class="nav-socials fade-up">
+                <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+        </div>
+    </nav>
+
+    <!-- Main App Wrapper -->
+    <div id="app-wrapper">
+    <div id="page-content">
+
+        <!-- Page Hero (ko1.webp) -->
+        <header class="page-hero">
+            <div class="page-hero-bg">
+                <div class="page-hero-overlay"></div>
+                <img src="assets/img/ko1.webp" alt="Massage Kobido" class="page-hero-img">
+            </div>
+            
+            <div class="page-hero-content">
+                <h1 class="page-title fade-up">Kobido</h1>
+            </div>
+            <a href="#intro" class="chevron-down-arrow chevron-hero"><i class="fa-solid fa-chevron-down"></i></a>
+        </header>
+
+        <!-- Intro Section : Qu'est-ce que le Kobido -->
+        <section id="intro" class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">Qu’est-ce que le massage Kobido ?</h2>
+                    <h3 class="section-subtitle" style="font-size: 1.2rem; color: var(--color-text-muted); margin-bottom: 20px;">Né au XVe siècle, il est considéré comme un art traditionnel pour les japonais.</h3>
+                    <div class="service-content-body">
+                        <p>Ce type de massage agit sur le relâchement cutané au niveau du visage et est un des meilleurs massages pour combattre les signes de l’âge en stimulant les muscles et tissus du visage en profondeur. On le compare souvent à un lifting naturel. C’est un des massages asiatiques les plus appréciés avec entre autres le massage chinois, le massage thaïlandais et le massage balinais.</p>
+
+                        <p>Le massage Kobido suit un protocole très précis. Il est traditionnellement enseigné au Japon dans la maison Kobido où les techniques sont transmises de maîtres à élèves depuis 26 générations. De nos jours, c’est le Dr Shogo Mochizuki, médecin et spécialiste du massage japonais qui est le maître de la 26ème génération de la maison Kobido. Seuls quelques élus sont appelés à recevoir cet apprentissage.</p>
+
+                        <p>En France, on compte très peu de praticiens formés selon les enseignements authentiques du massage Kobido. Le plus connu est le maître Takumi Finch. À noter que l’on retrouve tout de même des massages s’inspirant des techniques ancestrales du Kobido.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <img src="assets/img/ko2.webp" alt="Pratique du massage Kobido">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bienfaits Section (ko3.webp) -->
+        <section class="detail-section section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light);">
+            <div class="container detail-container">
+                <div class="detail-text reveal-right">
+                    <h2 class="section-title">Les bienfaits du massage Kobido</h2>
+                    <div class="service-content-body">
+                        <p>Le Kobido est axé principalement sur l’équilibre du « chi », considéré comme l’énergie vitale.</p>
+                        
+                        <p>Il est notamment réputé pour ses bienfaits anti-âge. En effet, les diverses techniques du massage Kobido permettent de stimuler la micro-circulation cutanée, réactiver la circulation sanguine et le flux lymphatique. Ce qui entraîne une meilleure oxygénation des tissus et l’élimination des toxines et déchets métaboliques.</p>
+                        
+                        <p>Le massage Kobido agit également sur les tissus cutanés. Par le biais de différentes manœuvres, les tissus et muscles du visage sont stimulés afin de produire de l’élastine et le collagène. Résultat ? Les tissus cutanés sont raffermis, les muscles sont détendus, les rides sont lissés et le visage est tonifié et repulpé.</p>
+                        
+                        <p><strong>Pour faire simple, voici la liste des bienfaits du massage Kobido pour le visage :</strong></p>
+                        <ul style="list-style-type: none; padding-left: 0; margin: 15px 0 0 0; line-height: 1.5;">
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i>Stimuler la micro-circulation cutanée, active la circulation sanguine et le système lymphatique pour éliminer les toxines</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i>Stimuler la production de collagène et d’élastine pour retrouver une peau ferme et élastique</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i>Prévenir l’apparition des rides et atténuer les rides existantes (comme les rides d’expression)</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i>Décongestionner les yeux gonflés, lutter contre les poches et les cernes</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i>Retrouver une peau tonifiée et un teint éclatant</li>
+                            <li style="margin-bottom: 8px; position: relative; padding-left: 30px;"><i class="fa-solid fa-leaf" style="position: absolute; left: 0; top: 4px; color: var(--primary-color);"></i>Redessiner l’ovale du visage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left">
+                    <img src="assets/img/ko3.webp" alt="Bienfaits du massage Kobido">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A qui s'adresse (ko4.webp) -->
+        <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">À qui s’adresse le massage Kodibo ?</h2>
+                    <div class="service-content-body">
+                        <p>Le massage Kobido est un soin du visage qui peut s’adresser à tous les types de peau et ce, quel que soit l’âge.</p>
+                        
+                        <p>Mais du fait de ses vertus anti-âge, il est particulièrement recommandé pour les peaux matures. Avant 40 ans, le massage Kobido est idéal pour prévenir l’apparition des rides et retarder leur arrivée. Après 40 ans, on peut réaliser des massages Kobido en guise de cure ant-âge afin de stabiliser l’évolution des rides.</p>
+                        
+                        <p>Pour finir, le massage Kobido peut s’avérer une alternative idéale aux injections de la médecine esthétique. C’est une solution naturelle pour bénéficier des effets du lifting sans avoir recours à des injections.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <img src="assets/img/ko4.webp" alt="A qui s'adresse le Kobido">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comment pratiquer (ko5.webp) -->
+        <section class="detail-section section reveal-group" style="padding: 60px 0; background-color: var(--color-bg-light);">
+            <div class="container detail-container">
+                <div class="detail-text reveal-right">
+                    <h2 class="section-title">De quelle façon pratique t’on le massage Kodibo ?</h2>
+                    <div class="service-content-body">
+                        <p>Pour commencer, le Kobido est un massage qui s’effectue principalement au niveau du visage.<br>
+                        La nuque, le cou et le décolleté sont aussi des parties sur lesquelles le masseur travaille. Pour réaliser son massage, le praticien n’utilise pas d’huile de massage mais plutôt de la crème qui lui permet de garder un contact étroit avec les tissus cutanés.</p>
+                        
+                        <p>Quant à la gestuelle, le massage Kobido requiert l’utilisation de nombreux procédés. Parmi les différents mouvements, le masseur alterne pressions, modelages, lissages, étirements, frictions et vibrations.</p>
+                        
+                        <p>Une séance de massage Kobido se déroule de manière progressive. Le praticien commence toujours par déposer une serviette chaude et humide sur le visage afin de dilater les pores de la peau. Le visage est ensuite parfaitement nettoyé pour être prêt à recevoir le massage.</p>
+                        
+                        <p>Les gestuelles s’effectuent de façon crescendo et parfois dans un rythme saccadé qui varie de la douceur à l’intensité en passant par la profondeur et la légèreté. Pour réaliser cette chorégraphie précise et ponctuée par de nombreux rythmes différents, les masseurs utilisent leurs doigts et leurs mains mais peuvent aussi avoir recours à leurs poignets, avant-bras ainsi qu’à leurs épaules.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-left">
+                    <img src="assets/img/ko5.webp" alt="Gestuelle du Kobido">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fréquence (ko6.webp) -->
+        <section class="detail-section section detail-reverse reveal-group" style="padding: 60px 0;">
+            <div class="container detail-container reverse">
+                <div class="detail-text reveal-left">
+                    <h2 class="section-title">À quelle fréquence faut-il faire des massages Kobido ?</h2>
+                    <div class="service-content-body">
+                        <p>Les effets du massage Kobido sont immédiats. Dès la première séance, vous en ressentirez les bienfaits. Ces derniers durent en moyenne 15 jours. En ce sens, 1 à 2 séances par mois peuvent suffire pour prévenir la formation des rides, atténuer et lisser celles déjà présentes. À noter qu’il est recommandé de commencer par une séance par semaine au cours du premier mois.</p>
+                        
+                        <p>Le massage Kobido est donc bien plus qu’un simple soin du visage ; c’est une véritable tradition japonaise qui allie relaxation profonde et rajeunissement de la peau. En adoptant cette technique ancestrale, vous offrez à votre peau un lifting naturel, tout en profitant d’un moment de détente incomparable. Intégrez le massage Kobido dans votre routine de beauté pour un teint éclatant et une sensation de bien-être durable. Prenez soin de vous avec ce rituel unique qui allie beauté et sérénité.</p>
+                    </div>
+                </div>
+                <div class="detail-img-wrapper reveal-scale">
+                    <img src="assets/img/ko6.webp" alt="Fréquence des séances Kobido">
+                    <div class="nature-frame"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-brand">
+                    <a href="index.html#accueil"><img src="assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
+                    <h3>Stéphanie Bouteloup</h3>
+                    <p>Réflexologue titre rncp à Grasse</p>
+                    
+                    <div class="footer-socials">
+                        <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                        <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/st%C3%A9phanie-bouteloup-a66b47203company/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-group">
+                    <div class="footer-links">
+                        <h4>Certifications & Liens</h4>
+                        <a href="https://www.reflexobreton.fr/" target="_blank" rel="noopener" class="footer-link-text">Reflexo Breton</a>
+                        <a href="https://www.francecompetences.fr/recherche/rncp/23816/" target="_blank" rel="noopener" class="footer-link-text">France Compétences RNCP</a>
+                        <a href="https://www.reflexologues-rncp.com/" target="_blank" rel="noopener" class="footer-link-text">Réflexologues RNCP</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem; display: block; margin-bottom: 5px;">
+                            <a href="tel:+33628388349" class="footer-link-text">06.28.38.83.49.</a>
+                        </span>
+                        <a href="mailto:phanybox@gmail.com" class="footer-link-text" style="text-transform: none;">phanybox@gmail.com</a>
+                    </div>
+                    <div class="footer-cta" style="display: flex; align-items: flex-end; padding-bottom: 10px;">
+                        <a href="https://cfixe.com/book/stephanie-bouteloup" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary">PRENDRE RENDEZ-VOUS</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 30px; padding-top: 20px; padding-bottom: 10px; color: var(--color-text-muted); font-size: 0.9rem; font-style: italic;">
+                Site créé par Adam Bouteloup 
+                <a href="https://www.instagram.com/adam_btp" target="_blank" rel="noopener" style="color: var(--primary-color); margin-left: 8px; font-size: 1.2rem; vertical-align: middle;"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </footer>
+
+    </div> <!-- End Page Content -->
+    </div> <!-- End App Wrapper -->
+
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="installPrompt">
+        <div class="pwa-content">
+            <img src="assets/img/logo.png" alt="S. Bouteloup">
+            <div class="pwa-text">
+                <strong>Prendre RDV plus vite ?</strong>
+                <p>Installez l'App : réservez vos séances quand vous voulez, en 1 seul clic.</p>
+            </div>
+        </div>
+        <div class="pwa-actions">
+            <button class="btn btn-outline-primary btn-sm" id="closeInstall">Plus tard</button>
+            <button class="btn btn-primary btn-sm" id="btnInstall">Installer</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
