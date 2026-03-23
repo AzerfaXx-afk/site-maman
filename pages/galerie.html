@@ -26,6 +26,7 @@
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
 
     <style>
+        /* ===== HERO ===== */
         .page-hero {
             position: relative;
             height: 100vh;
@@ -77,124 +78,123 @@
             margin-top: 0;
         }
 
-        /* FULL WIDTH ARTISTIC MASONRY CSS - EXACT LAYOUT */
-        .artistic-gallery {
+        /* ===== GALLERY GRID - FULL WIDTH MOSAIC ===== */
+        .gallery-mosaic {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 33.333vw; /* Perfect squares based on screen width */
-            gap: 2px; /* Very thin premium line between images */
+            grid-auto-rows: 33vw;
+            gap: 3px;
+            width: 100%;
             padding: 0;
             margin: 0;
-            width: 100%;
             grid-auto-flow: dense;
         }
 
-        .diploma-item {
+        .gallery-mosaic .g-item {
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            border-radius: 0; /* No radius */
-            padding: 0;
-            margin: 0;
-            background: #000;
-            display: block;
-            z-index: 1;
-            border: none;
-            box-shadow: none;
-            -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove blue flash on mobile tap */
+            background: #1a1a1a;
+            -webkit-tap-highlight-color: transparent;
         }
-        .diploma-item img {
+        .gallery-mosaic .g-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 0;
-            pointer-events: none; /* Let the div handle clicks */
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+            display: block;
+            pointer-events: none;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
         }
-        /* Elegant hover zoom */
+
+        /* Hover effects only on devices that support hover */
         @media (hover: hover) {
-            .diploma-item:hover {
-                z-index: 2;
+            .gallery-mosaic .g-item:hover img {
+                transform: scale(1.06);
+                filter: brightness(0.85);
             }
-            .diploma-item:hover img {
-                transform: scale(1.05);
-                opacity: 0.9;
+            .gallery-mosaic .g-item:hover .g-zoom {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
             }
         }
 
-        .zoom-btn {
+        .g-zoom {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.6);
+            width: 50px;
+            height: 50px;
             background: rgba(255,255,255,0.9);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
             opacity: 0;
-            transform: translateY(15px);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 3;
-            font-size: 1.1rem;
-            pointer-events: none; /* Let parent handle clicks */
-        }
-        
-        @media (hover: hover) {
-            .diploma-item:hover .zoom-btn {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            pointer-events: none;
         }
 
-        /* Fix for iOS Safari Double-Tap Bug */
+        /* On touch devices: small zoom icon bottom-right, always visible */
         @media (hover: none) {
-            .zoom-btn {
-                opacity: 1;
-                transform: translateY(0);
-                background: rgba(255,255,255,0.7);
-                width: 36px; height: 36px;
-                bottom: 10px; right: 10px;
+            .g-zoom {
+                top: auto;
+                left: auto;
+                bottom: 10px;
+                right: 10px;
+                transform: none;
+                opacity: 0.8;
+                width: 36px;
+                height: 36px;
                 font-size: 0.9rem;
             }
         }
-        
-        /* 
-           PERFECT REPEATING 3-COLUMN MOSAIC FOR ALL 24 IMAGES
-           Block 1 (Items 1-3): Big Left, 2 Small Right
-           Block 2 (Items 4-6): Big Right, 2 Small Left
-           This naturally alternates to create an incredible mosaic!
+
+        /* ======= MOSAIC PATTERN =======
+           Repeating block of 6:
+           Items 1,7,13,19  = BIG LEFT  (col 1-2, row span 2)
+           Items 4,10,16,22 = BIG RIGHT (col 2-3, row span 2)
         */
-        .diploma-item:nth-child(6n + 1) { 
-            grid-column: 1 / 3; 
-            grid-row: span 2; 
+        .gallery-mosaic .g-item:nth-child(6n+1) {
+            grid-column: 1 / 3;
+            grid-row: span 2;
+        }
+        .gallery-mosaic .g-item:nth-child(6n+4) {
+            grid-column: 2 / 4;
+            grid-row: span 2;
         }
 
-        .diploma-item:nth-child(6n + 4) { 
-            grid-column: 2 / 4; 
-            grid-row: span 2; 
-        }
-
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
-            .artistic-gallery {
+            .gallery-mosaic {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 50vw;
             }
-            .diploma-item {
+            .gallery-mosaic .g-item {
                 grid-column: span 1 !important;
                 grid-row: span 1 !important;
             }
-            /* Alternate 1 wide row, 2 squares on mobile/tablet */
-            .diploma-item:nth-child(3n+1) {
+            /* Every 3rd item = wide across top */
+            .gallery-mosaic .g-item:nth-child(3n+1) {
                 grid-column: 1 / 3 !important;
-                grid-row: span 1 !important;
             }
         }
 
-/* LIGHTBOX STYLES EXACTLY LIKE QUI-JE-SUIS */
+        @media (max-width: 992px) {
+            .page-title { font-size: 3.5rem; }
+            .page-subtitle { font-size: 1.5rem; }
+        }
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.8rem; }
+            .page-subtitle { font-size: 1.2rem; }
+            .page-hero { height: 50vh; }
+        }
+
+        /* ===== LIGHTBOX (identical to diplomas) ===== */
         .lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -210,9 +210,6 @@
         .lightbox.active {
             opacity: 1;
             visibility: visible;
-        }
-        .lightbox.active .lightbox-content {
-            transform: scale(1);
         }
         .lightbox-zoom-container {
             position: relative;
@@ -302,38 +299,16 @@
         }
         .lightbox-prev { left: 2%; }
         .lightbox-next { right: 2%; }
-        
-        
+
         @media (max-width: 992px) {
-            .page-title { font-size: 3.5rem; }
-            .page-subtitle { font-size: 1.5rem; }
             .lightbox-nav { font-size: 1.5rem; padding: 10px; width: 44px; height: 44px; }
             .lightbox-prev { left: 5px; }
             .lightbox-next { right: 5px; }
             .lightbox-close { top: 10px; right: 15px; font-size: 2rem; }
         }
         @media (max-width: 768px) {
-            .page-title { font-size: 2.8rem; }
-            .page-subtitle { font-size: 1.2rem; }
-            .page-hero { height: 50vh; }
-            
-            
             .lightbox-content { max-width: 96vw; max-height: 86vh; }
-            .lightbox-nav { font-size: 1.5rem; padding: 10px; width: 44px; height: 44px; }
-            .lightbox-prev { left: 5px; }
-            .lightbox-next { right: 5px; }
-            .lightbox-close { top: 10px; right: 15px; font-size: 2rem; }
             .lightbox-counter { bottom: 10px; font-size: 0.8rem; }
-            .zoom-btn { opacity: 1; transform: none; width: 32px; height: 32px; font-size: 0.9rem; }
-            
-            /* Reset some spans for 2 columns */
-            .diploma-item:nth-child(3),
-            .diploma-item:nth-child(10),
-            .diploma-item:nth-child(17),
-            .diploma-item:nth-child(24) { grid-column: span 2; grid-row: span 1; }
-            .diploma-item:nth-child(5),
-            .diploma-item:nth-child(12),
-            .diploma-item:nth-child(19) { grid-column: span 1; grid-row: span 2; }
         }
         @media (max-width: 480px) {
             .lightbox-content { max-width: 100vw; max-height: 82vh; border-radius: 0; }
@@ -341,11 +316,7 @@
             .lightbox-nav { font-size: 1.2rem; width: 36px; height: 36px; padding: 8px; }
             .lightbox-prev { left: 2px; }
             .lightbox-next { right: 2px; }
-            
-            /* Pinterest style for mobile */
-            
         }
-    
     </style>
 </head>
 <body>
@@ -388,13 +359,12 @@
     <div id="app-wrapper">
     <div id="page-content">
 
-        <!-- Page Hero (g1.webp) -->
+        <!-- Page Hero -->
         <header class="page-hero">
             <div class="page-hero-bg">
                 <div class="page-hero-overlay"></div>
                 <img src="../assets/img/g1.webp" alt="Galerie" class="page-hero-img">
             </div>
-            
             <div class="page-hero-content">
                 <h1 class="page-title fade-up">Galerie Photos</h1>
                 <p class="page-subtitle fade-up delay-1">Un aperçu de notre univers</p>
@@ -402,40 +372,39 @@
             <a href="#gallery" class="chevron-down-arrow chevron-hero"><i class="fa-solid fa-chevron-down"></i></a>
         </header>
 
-        <!-- Gallery Grid Section -->
-        <section id="gallery" class="section reveal-group" style="padding: 80px 0; background-color: var(--color-bg-light); min-height: 80vh;">
-            <div class="container">
-                <div style="text-align: center; margin-bottom: 50px;">
-                    <h2 class="section-title reveal-up">Une ambiance propice à la détente</h2>
-                    <p class="section-subtitle reveal-up delay-1" style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Plongez dans l'atmosphère apaisante de notre cabinet et découvrez les espaces dédiés à votre bien-être.</p>
-                </div>
-                
-                    <div class="diploma-item" data-id="1" data-src="../assets/img/g1.webp"><img src="../assets/img/g1.webp" alt="Galerie 1" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="2" data-src="../assets/img/g2.webp"><img src="../assets/img/g2.webp" alt="Galerie 2" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="3" data-src="../assets/img/g3.webp"><img src="../assets/img/g3.webp" alt="Galerie 3" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="4" data-src="../assets/img/g4.webp"><img src="../assets/img/g4.webp" alt="Galerie 4" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="5" data-src="../assets/img/g5.webp"><img src="../assets/img/g5.webp" alt="Galerie 5" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="6" data-src="../assets/img/g6.webp"><img src="../assets/img/g6.webp" alt="Galerie 6" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="7" data-src="../assets/img/g7.webp"><img src="../assets/img/g7.webp" alt="Galerie 7" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="8" data-src="../assets/img/g8.webp"><img src="../assets/img/g8.webp" alt="Galerie 8" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="9" data-src="../assets/img/g9.webp"><img src="../assets/img/g9.webp" alt="Galerie 9" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="10" data-src="../assets/img/g10.webp"><img src="../assets/img/g10.webp" alt="Galerie 10" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="11" data-src="../assets/img/g11.webp"><img src="../assets/img/g11.webp" alt="Galerie 11" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="12" data-src="../assets/img/g12.webp"><img src="../assets/img/g12.webp" alt="Galerie 12" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="13" data-src="../assets/img/g13.webp"><img src="../assets/img/g13.webp" alt="Galerie 13" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="14" data-src="../assets/img/g14.webp"><img src="../assets/img/g14.webp" alt="Galerie 14" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="15" data-src="../assets/img/g15.webp"><img src="../assets/img/g15.webp" alt="Galerie 15" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="16" data-src="../assets/img/g16.webp"><img src="../assets/img/g16.webp" alt="Galerie 16" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="17" data-src="../assets/img/g17.webp"><img src="../assets/img/g17.webp" alt="Galerie 17" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="18" data-src="../assets/img/g18.webp"><img src="../assets/img/g18.webp" alt="Galerie 18" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="19" data-src="../assets/img/g19.webp"><img src="../assets/img/g19.webp" alt="Galerie 19" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="20" data-src="../assets/img/g20.webp"><img src="../assets/img/g20.webp" alt="Galerie 20" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="21" data-src="../assets/img/g21.webp"><img src="../assets/img/g21.webp" alt="Galerie 21" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="22" data-src="../assets/img/g22.webp"><img src="../assets/img/g22.webp" alt="Galerie 22" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="23" data-src="../assets/img/g23.webp"><img src="../assets/img/g23.webp" alt="Galerie 23" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
-                    <div class="diploma-item" data-id="24" data-src="../assets/img/g24.webp"><img src="../assets/img/g24.webp" alt="Galerie 24" loading="lazy"><div class="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+        <!-- Gallery Section -->
+        <section id="gallery" style="padding: 60px 0 0 0; background-color: var(--color-bg-light);">
+            <div class="container" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="section-title reveal-up">Une ambiance propice à la détente</h2>
+                <p class="section-subtitle reveal-up delay-1" style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">Plongez dans l'atmosphère apaisante de notre cabinet et découvrez les espaces dédiés à votre bien-être.</p>
+            </div>
 
-
+            <!-- THE GRID: Full width, OUTSIDE .container -->
+            <div class="gallery-mosaic" id="galleryGrid">
+                <div class="g-item" data-src="../assets/img/g1.webp"><img src="../assets/img/g1.webp" alt="Galerie 1" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g2.webp"><img src="../assets/img/g2.webp" alt="Galerie 2" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g3.webp"><img src="../assets/img/g3.webp" alt="Galerie 3" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g4.webp"><img src="../assets/img/g4.webp" alt="Galerie 4" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g5.webp"><img src="../assets/img/g5.webp" alt="Galerie 5" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g6.webp"><img src="../assets/img/g6.webp" alt="Galerie 6" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g7.webp"><img src="../assets/img/g7.webp" alt="Galerie 7" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g8.webp"><img src="../assets/img/g8.webp" alt="Galerie 8" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g9.webp"><img src="../assets/img/g9.webp" alt="Galerie 9" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g10.webp"><img src="../assets/img/g10.webp" alt="Galerie 10" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g11.webp"><img src="../assets/img/g11.webp" alt="Galerie 11" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g12.webp"><img src="../assets/img/g12.webp" alt="Galerie 12" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g13.webp"><img src="../assets/img/g13.webp" alt="Galerie 13" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g14.webp"><img src="../assets/img/g14.webp" alt="Galerie 14" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g15.webp"><img src="../assets/img/g15.webp" alt="Galerie 15" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g16.webp"><img src="../assets/img/g16.webp" alt="Galerie 16" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g17.webp"><img src="../assets/img/g17.webp" alt="Galerie 17" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g18.webp"><img src="../assets/img/g18.webp" alt="Galerie 18" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g19.webp"><img src="../assets/img/g19.webp" alt="Galerie 19" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g20.webp"><img src="../assets/img/g20.webp" alt="Galerie 20" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g21.webp"><img src="../assets/img/g21.webp" alt="Galerie 21" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g22.webp"><img src="../assets/img/g22.webp" alt="Galerie 22" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g23.webp"><img src="../assets/img/g23.webp" alt="Galerie 23" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+                <div class="g-item" data-src="../assets/img/g24.webp"><img src="../assets/img/g24.webp" alt="Galerie 24" loading="lazy"><div class="g-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
             </div>
         </section>
 
@@ -446,7 +415,6 @@
                     <a href="../index.html#accueil"><img src="../assets/img/logo.png" alt="S. Bouteloup Logo" style="width: 50px; margin-bottom: 15px;"></a>
                     <h3>Stéphanie Bouteloup</h3>
                     <p>Réflexologue titre rncp à Grasse</p>
-                    
                     <div class="footer-socials">
                         <a href="mailto:phanybox@gmail.com"><i class="fa-regular fa-envelope"></i></a>
                         <a href="https://facebook.com/phanybox" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
@@ -454,7 +422,6 @@
                         <a href="https://instagram.com/stephanie_btp" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-links-group">
                     <div class="footer-links">
                         <h4>Certifications & Liens</h4>
@@ -485,8 +452,8 @@
     </div> <!-- End Page Content -->
     </div> <!-- End App Wrapper -->
 
-    <!-- Lightbox Element EXACTLY LIKE QUI-JE-SUIS -->
-    <div class="lightbox" id="diplomaLightbox">
+    <!-- Lightbox (identical to diplomas) -->
+    <div class="lightbox" id="galleryLightbox">
         <i class="fa-solid fa-xmark lightbox-close" id="closeLightbox"></i>
         <i class="fa-solid fa-chevron-left lightbox-nav lightbox-prev" id="prevLightbox"></i>
         <i class="fa-solid fa-chevron-right lightbox-nav lightbox-next" id="nextLightbox"></i>
@@ -519,18 +486,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Lightbox & Display Logic EXTREMELY IDENTICAL TO QUI-JE-SUIS
-            const lightbox = document.getElementById('diplomaLightbox');
+            // ===== LIGHTBOX LOGIC (identical to qui-je-suis diplomas) =====
+            const lightbox = document.getElementById('galleryLightbox');
             const lightboxImg = document.getElementById('lightboxImg');
             const closeLightboxBtn = document.getElementById('closeLightbox');
             const zoomContainer = document.getElementById('zoomContainer');
             const lightboxCounter = document.getElementById('lightboxCounter');
-            
-            const getItems = () => document.querySelectorAll('.diploma-item');
-            let items = getItems();
+            const items = document.querySelectorAll('.g-item');
+            const total = items.length;
             let currentIndex = 0;
             let isZoomed = false;
-            const total = 24;
 
             // --- ZOOM LOGIC ---
             const resetZoom = () => {
@@ -611,14 +576,6 @@
                 lightboxCounter.textContent = (currentIndex + 1) + ' / ' + total;
             };
 
-            // EXPLICIT ENTRANCE ANIMATION
-            gsap.fromTo(items, 
-                { opacity: 0, scale: 0.5, y: 50 }, 
-                { opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.05, ease: 'back.out(1.5)', 
-                  scrollTrigger: { trigger: ' 
-                }
-            );
-
             // --- OPEN LIGHTBOX ---
             const openLightbox = (index) => {
                 currentIndex = index;
@@ -633,7 +590,7 @@
                 }
             };
 
-            // CLICK EVENT (since no sortable drag, we just attach raw click event)
+            // CLICK EVENT on each gallery item
             items.forEach((item, index) => {
                 item.addEventListener('click', () => {
                     openLightbox(index);
@@ -664,7 +621,7 @@
                 updateLightboxImage(currentIndex);
             });
 
-            closeLightboxBtn.addEventListener('click', (e) => {
+            closeLightboxBtn.addEventListener('click', () => {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
             });
@@ -704,6 +661,14 @@
                 if (e.key === 'ArrowRight') document.getElementById('nextLightbox').click();
                 if (e.key === 'ArrowLeft') document.getElementById('prevLightbox').click();
             });
+
+            // ===== ENTRANCE ANIMATION =====
+            gsap.fromTo(items, 
+                { opacity: 0, scale: 0.85, y: 30 }, 
+                { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.04, ease: 'power2.out', 
+                  scrollTrigger: { trigger: '#galleryGrid', start: 'top 90%' }
+                }
+            );
 
         });
     </script>
