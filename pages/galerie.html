@@ -101,6 +101,7 @@
             z-index: 1;
             border: none;
             box-shadow: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove blue flash on mobile tap */
         }
         .diploma-item img {
             width: 100%;
@@ -110,12 +111,15 @@
             pointer-events: none; /* Let the div handle clicks */
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
         }
-        .diploma-item:hover {
-            z-index: 2;
-        }
-        .diploma-item:hover img {
-            transform: scale(1.05);
-            opacity: 0.9;
+        /* Elegant hover zoom */
+        @media (hover: hover) {
+            .diploma-item:hover {
+                z-index: 2;
+            }
+            .diploma-item:hover img {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
         }
 
         .zoom-btn {
@@ -136,26 +140,40 @@
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 3;
             font-size: 1.1rem;
+            pointer-events: none; /* Let parent handle clicks */
         }
-        .diploma-item:hover .zoom-btn {
-            opacity: 1;
-            transform: translateY(0);
+        
+        @media (hover: hover) {
+            .diploma-item:hover .zoom-btn {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Fix for iOS Safari Double-Tap Bug */
+        @media (hover: none) {
+            .zoom-btn {
+                opacity: 1;
+                transform: translateY(0);
+                background: rgba(255,255,255,0.7);
+                width: 36px; height: 36px;
+                bottom: 10px; right: 10px;
+                font-size: 0.9rem;
+            }
         }
         
         /* 
-           PERFECT REPEATING 3-COLUMN MOSAIC 
-           A classic: 
-           - Big left (items 1, 13)
-           - Big right (items 7, 19)
+           PERFECT REPEATING 3-COLUMN MOSAIC FOR ALL 24 IMAGES
+           Block 1 (Items 1-3): Big Left, 2 Small Right
+           Block 2 (Items 4-6): Big Right, 2 Small Left
+           This naturally alternates to create an incredible mosaic!
         */
-        .diploma-item:nth-child(1),
-        .diploma-item:nth-child(13) { 
+        .diploma-item:nth-child(6n + 1) { 
             grid-column: 1 / 3; 
             grid-row: span 2; 
         }
 
-        .diploma-item:nth-child(7),
-        .diploma-item:nth-child(19) { 
+        .diploma-item:nth-child(6n + 4) { 
             grid-column: 2 / 4; 
             grid-row: span 2; 
         }
@@ -175,16 +193,7 @@
                 grid-row: span 1 !important;
             }
         }
-        @media (max-width: 500px) {
-            .zoom-btn {
-                opacity: 1; /* Always visible slightly on touch devices */
-                transform: translateY(0);
-                background: rgba(255,255,255,0.7);
-                width: 36px; height: 36px;
-                bottom: 10px; right: 10px;
-                font-size: 0.9rem;
-            }
-        }
+
 /* LIGHTBOX STYLES EXACTLY LIKE QUI-JE-SUIS */
         .lightbox {
             position: fixed;
