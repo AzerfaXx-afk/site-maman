@@ -1,0 +1,55 @@
+# Redirections 301 des anciennes URLs Squarespace vers les nouvelles pages
+# À placer à la racine de l'hébergement IONOS
+
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Force www
+RewriteCond %{HTTP_HOST} ^reflexo-grasse\.fr$ [NC]
+RewriteRule ^(.*)$ https://www.reflexo-grasse.fr/$1 [L,R=301]
+
+# ===== REDIRECTIONS 301 - Anciennes URLs Squarespace → Nouvelles pages =====
+
+# Page d'accueil
+RewriteRule ^accueil-reflexologie-grasse/?$ / [R=301,L]
+
+# Réflexologie
+RewriteRule ^reflexologie-grasse/?$ /pages/reflexologie.html [R=301,L]
+
+# Contact / Prendre RDV
+RewriteRule ^contact-reflexologie-grasse/?$ /pages/rendez-vous.html [R=301,L]
+
+# Qui je suis
+RewriteRule ^qui-je-suis/?$ /pages/qui-je-suis.html [R=301,L]
+
+# Tarifs
+RewriteRule ^tarifs-seance/?$ /pages/tarifs.html [R=301,L]
+
+# Galerie
+RewriteRule ^galerie-2/?$ /pages/galerie.html [R=301,L]
+
+# Massages
+RewriteRule ^massages/?$ /pages/massages.html [R=301,L]
+
+# Bons Cadeaux
+RewriteRule ^cadeaux-no/?$ /pages/bons-cadeaux.html [R=301,L]
+
+# Kobido
+RewriteRule ^kobido/?$ /pages/kobido.html [R=301,L]
+
+# Tous les bons cadeaux individuels → page bons cadeaux
+RewriteRule ^bon-cadeau-reflexologie-60-min/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-reflexologie-3-seances-60-min/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-reflexologie-5-seances-60-min/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-chi-nei-tsang/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-massage-suedois/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-massage-suedois-1h30/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-massage-duo/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-massage-duo-1h30/?$ /pages/bons-cadeaux.html [R=301,L]
+RewriteRule ^bon-cadeau-drainage/?$ /pages/bons-cadeaux.html [R=301,L]
+
+# Catch-all pour les anciens bons cadeaux non listés
+RewriteRule ^bon-cadeau-(.*)$ /pages/bons-cadeaux.html [R=301,L]

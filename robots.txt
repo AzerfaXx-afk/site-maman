@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /config/
+
+Sitemap: https://www.reflexo-grasse.fr/sitemap.xml
